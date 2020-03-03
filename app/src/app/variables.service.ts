@@ -8,6 +8,6 @@ export class VariablesService {
   constructor() { }
 
   base_url(){
-  return 'ss';
+  return './';
   }
 }

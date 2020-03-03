@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { VariablesService } from './variables.service';
 import { GetService } from './get.service';
+import { HTTP } from '@ionic-native/http/ngx';
+
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -20,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     SplashScreen,
     VariablesService,
     GetService,
+    HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
