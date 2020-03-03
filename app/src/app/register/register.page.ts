@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-register',
@@ -6,8 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+	loginData = {
+		username: '',
+		password: '',
+		type: ''
+	}
+  constructor(private pService: PostService) {}
 
-  constructor() { }
+  Register(){
+  	var responseData = this.pService.Register(this.loginData);
+  	console.log(responseData);
+  }
 
   ngOnInit() {
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { GetService } from '../get.service';
+import { PostService } from '../post.service';
 
 @Component({
   selector: 'app-home',
@@ -8,14 +9,33 @@ import { GetService } from '../get.service';
 })
 export class HomePage {
 
-  constructor(private gService: GetService) {}
+storedUser = {
+	username: '',
+	password: '',
+	type: ''   	
+   }
+  constructor(private gService: GetService, private pService: PostService) {}
 
-  letsee(){
-  var hmm = this.gService.login();
-  console.log(hmm);
+  validateUser(){
+  this.pService.validateUser();  
+  var loginJson = this.pService.returnLoginJson();  
+  this.storedUser = loginJson;
+  console.log(this.storedUser);	
   }
 
 
+  Logout(){
+  this.pService.Logout();  	
+  }
+
+  letsee(){
+  var hmm = this.gService.login();
+  console.log(this.gService.login());
+  }
+  
+  ngOnInit(){
+  	this.validateUser();
+  }
 
 }
 

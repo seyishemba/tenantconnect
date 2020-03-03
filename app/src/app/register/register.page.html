@@ -1,9 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+	 
+<ion-item>
+  <ion-label position="floating">Username</ion-label>
+  <ion-input [(ngModel)]="loginData.username"></ion-input>
+</ion-item>
+	 
+<ion-item>
+  <ion-label position="floating">Password</ion-label>
+  <ion-input [(ngModel)]="loginData.password"></ion-input>
+</ion-item>
+	 
+<ion-item>
+  <ion-label position="floating">Type</ion-label>
+  <ion-input [(ngModel)]="loginData.type"></ion-input>
+</ion-item>
 
+
+<ion-button (click)="Register()" expand="block">Register</ion-button>
+
+<ion-button [routerLink]="['/login']" routerDirection="backward" expand="block">Login</ion-button>
 </ion-content>

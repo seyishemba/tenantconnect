@@ -4,7 +4,8 @@ import { RouteReuseStrategy } from '@angular/router';
 import { VariablesService } from './variables.service';
 import { GetService } from './get.service';
 import { HTTP } from '@ionic-native/http/ngx';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -23,6 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
     VariablesService,
     GetService,
     HTTP,
+    HttpClientModule,
+    NativeStorage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
