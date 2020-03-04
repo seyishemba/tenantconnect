@@ -15,10 +15,15 @@ export class PostService {
 	password: '',
 	type: ''   	
    }
+   	listingsJSON = [];
 
    constructor(private http: HTTP, public loadingCntrl: LoadingController, public navCtrl: NavController, private nStorage: NativeStorage) {}
 
 
+
+ returnListings(){
+   	return this.listingsJSON;
+   }
    storeLogin(loginData){
    	this.nStorage.setItem('storedLogin', {loginData})
   .then(
@@ -27,7 +32,6 @@ export class PostService {
   );
    	console.log(loginData);
    }
-
 
    validateUser(){
    	this.nStorage.getItem('storedLogin')

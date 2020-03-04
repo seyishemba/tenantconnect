@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-item>
+  <ion-label position="floating">Email</ion-label>
+  <ion-input [(ngModel)]="profileData.email" ng-disabled='true'></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Username</ion-label>
+  <ion-input [(ngModel)]="profileData.username" ng-disabled='true'></ion-input>
+</ion-item>
+	 
+<ion-item>
+  <ion-label position="floating">Full Name</ion-label>
+  <ion-input [(ngModel)]="profileData.full_name"></ion-input>
+</ion-item>
+	 
+<ion-item>
+  <ion-label position="floating">Current Location</ion-label>
+  <ion-input [(ngModel)]="profileData.current_location"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Contact Number</ion-label>
+  <ion-input [(ngModel)]="profileData.contact_number"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Password</ion-label>
+  <ion-input [(ngModel)]="profileData.password"></ion-input>
+</ion-item>
+
+<ion-item>
+  <ion-label position="floating">Type</ion-label>
+  <ion-input [(ngModel)]="profileData.type"></ion-input>
+</ion-item>
+
+
+<ion-button (click)="checkProfile('edit')" expand="block">Edit Profile</ion-button>
+
+</ion-content>

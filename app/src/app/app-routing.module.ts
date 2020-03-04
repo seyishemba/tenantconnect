@@ -13,19 +13,19 @@ const routes: Routes = [
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
   {
-    path: 'listing',
+    path: 'listing/:type',
     loadChildren: () => import('./listing/listing.module').then( m => m.ListingPageModule)
   },
   {
-    path: 'requests',
+    path: 'requests/:type',
     loadChildren: () => import('./requests/requests.module').then( m => m.RequestsPageModule)
   },
   {
-    path: 'view-listing',
+    path: 'view-listing/:id',
     loadChildren: () => import('./view-listing/view-listing.module').then( m => m.ViewListingPageModule)
   },
   {
-    path: 'view-request',
+    path: 'view-request/:id',
     loadChildren: () => import('./view-request/view-request.module').then( m => m.ViewRequestPageModule)
   },
   {
@@ -39,6 +39,10 @@ const routes: Routes = [
   {
     path: 'connections',
     loadChildren: () => import('./connections/connections.module').then( m => m.ConnectionsPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
 ];
 

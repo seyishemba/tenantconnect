@@ -5,5 +5,9 @@
 </ion-header>
 
 <ion-content>
-
+	{{showType}}
+	<ion-item button *ngFor="let requests of requestsData">
+    <ion-label routerLink="/view-request/{{requests.id}}" routerDirection="forward"> {{requests.title}}</ion-label>
+   
+  </ion-item>
 </ion-content>

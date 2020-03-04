@@ -8,42 +8,42 @@
 <ion-content>
 
 <!-- Item as a Button -->
-<ion-item button (click)="buttonClick()">
+<ion-item button [routerLink]="['/listing/all']" routerDirection="forward">
   <ion-label>
     Listings
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()">
+<ion-item button [routerLink]="['/requests/all']" routerDirection="forward">
   <ion-label>
     Requests
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()" *ngIf="storedUser.type === 'landlord'">
+<ion-item button [routerLink]="['/add-listing']" routerDirection="forward" *ngIf="storedUser.type === 'landlord'">
   <ion-label>
     Add Listing
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()" *ngIf="storedUser.type === 'tenant'">
+<ion-item button [routerLink]="['/add-request']" routerDirection="forward" *ngIf="storedUser.type === 'tenant'">
   <ion-label>
     Add Requests
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()" *ngIf="storedUser.type === 'landlord'">
+<ion-item button [routerLink]="['/listing/owner']" routerDirection="forward" *ngIf="storedUser.type === 'landlord'">
   <ion-label>
     My Listings
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()" *ngIf="storedUser.type === 'tenant'">
+<ion-item button [routerLink]="['/requests/owner']" routerDirection="forward" *ngIf="storedUser.type === 'tenant'">
   <ion-label>
     My Requests
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()">
+<ion-item button [routerLink]="['/profile']" routerDirection="forward">
   <ion-label>
     My Profile
   </ion-label>
 </ion-item>
-<ion-item button (click)="buttonClick()">
+<ion-item button [routerLink]="['/connections']" routerDirection="forward">
   <ion-label>
     Connections
   </ion-label>

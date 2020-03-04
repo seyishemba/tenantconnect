@@ -5,5 +5,11 @@
 </ion-header>
 
 <ion-content>
+	{{showType}}
+	
+	<ion-item button *ngFor="let listing of listingData">
+    <ion-label routerLink="/view-listing/{{listing.id}}" routerDirection="forward"> {{listing.title}}</ion-label>
+   
+  </ion-item>
 
 </ion-content>
