@@ -29,11 +29,11 @@ const routes: Routes = [
     loadChildren: () => import('./view-request/view-request.module').then( m => m.ViewRequestPageModule)
   },
   {
-    path: 'add-listing',
+    path: 'add-listing/:id',
     loadChildren: () => import('./add-listing/add-listing.module').then( m => m.AddListingPageModule)
   },
   {
-    path: 'add-request',
+    path: 'add-request/:id',
     loadChildren: () => import('./add-request/add-request.module').then( m => m.AddRequestPageModule)
   },
   {

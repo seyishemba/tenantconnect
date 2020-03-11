@@ -1,9 +1,316 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add_listing</ion-title>
+    <ion-title>Add Listing</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div *ngIf="view_type === 'new'">
+	<!-- Default Segment -->
+<ion-segment  [(ngModel)]="listingData.property_type" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="House">
+    <ion-label>House</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="Room">
+    <ion-label>Room</ion-label>
+  </ion-segment-button>
+</ion-segment>
+</div>
+<div>
+<ion-card>
+
+<ion-item>
+  <ion-label position="floating">Title</ion-label>
+  <ion-input required [(ngModel)]="listingData.title"></ion-input>
+</ion-item>
+
+  <ion-item>
+  <ion-label position="floating">Location</ion-label>
+  <ion-input required [(ngModel)]="listingData.location"></ion-input>
+  </ion-item>
+
+  <ion-card-content>
+  <ion-label position="floating">Description</ion-label>
+  <ion-input required [(ngModel)]="listingData.description"></ion-input>
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-item class="ion-activated">
+    <ion-icon name="wifi" slot="start"></ion-icon>
+    <ion-input placeholder="Amount" required [(ngModel)]="listingData.amount"></ion-input> 
+     <ion-select required [(ngModel)]="listingData.duration" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Duration">
+      <ion-select-option value="Month">Month</ion-select-option>
+      <ion-select-option value="Year">Year</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item >
+    <ion-icon name="wine" slot="start"></ion-icon>
+    <ion-input placeholder="When to move" required [(ngModel)]="listingData.when_to_move"></ion-input> 
+
+  </ion-item>
+
+  <ion-item class="ion-activated">
+    <ion-icon name="warning" slot="start"></ion-icon>
+     <ion-select required [(ngModel)]="listingData.furnished" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Furnished">
+      <ion-select-option value="Yes">Yes</ion-select-option>
+      <ion-select-option value="No">No</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-icon name="walk" slot="start"></ion-icon>
+    <ion-input placeholder="Apartment Size" required [(ngModel)]="listingData.size"></ion-input> 
+    <ion-select required [(ngModel)]="listingData.measurement" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Measurement">
+      <ion-select-option value="Sq">Sq</ion-select-option>
+      <ion-select-option value="Cm">Cm</ion-select-option>
+    </ion-select>
+  </ion-item>
+</ion-card>
+
+<hr>
+<div *ngIf="listingData.property_type === 'House' || listingData.property_type === 'Place'">
+	  <ion-row button>
+    <ion-col size="6">
+      <h5 style="text-align: center;">Bedrooms:
+      </h5>
+      
+    <ion-input placeholder="Select Amount" required [(ngModel)]="listingData.bedrooms"></ion-input> 
+
+    </ion-col>
+    <ion-col size="6">
+      <h5 style="text-align: center;">Bedrooms:
+   </h5>
+    <ion-input placeholder="Select Amount" required [(ngModel)]="listingData.bathrooms"></ion-input> 
+    </ion-col>
+</ion-row>
+</div>
+<div style="padding: 20px" *ngIf="listingData.property_type === 'House' || listingData.property_type === 'Place'">
+<strong>Features</strong>
+<ion-grid>
+  <ion-row>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.high_rise"></ion-checkbox> High Rise	</ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.low_rise"></ion-checkbox> Low Rise </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.disability_access"></ion-checkbox> disability_access </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.door_man"></ion-checkbox> door_man </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.elevator"></ion-checkbox> elevator </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.walkup"></ion-checkbox> walkup </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.health_club"></ion-checkbox> health_club </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.laundromat"></ion-checkbox> laundromat </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.covered_parking"></ion-checkbox> covered_parking </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.garage"></ion-checkbox> garage </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.parking_lot"></ion-checkbox> parking_lot </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.street_parking"></ion-checkbox> street_parking </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.near_bus_stop"></ion-checkbox> near_bus_stop </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.near_subway"></ion-checkbox> near_subway </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.electronic_security"></ion-checkbox> electronic_security </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.security"></ion-checkbox>security </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.swimming_pool"></ion-checkbox> swimming_pool </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.internet"></ion-checkbox> internet </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Hfeatures.wireless_internet"></ion-checkbox> wireless_internet </ion-col>
+
+</ion-row>
+</ion-grid>
+</div>
+<div style="padding: 20px" *ngIf="listingData.property_type === 'Room'">
+	<strong>Features</strong>
+<ion-grid>
+  <ion-row>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.air_condition"></ion-checkbox> air_condition </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.deck_or_patio"></ion-checkbox> deck_or_patio </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.wood_floors"></ion-checkbox> wood_floors </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.yard"></ion-checkbox> yard </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.carpet"></ion-checkbox> carpet </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.storage"></ion-checkbox> storage </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.gym"></ion-checkbox> gym </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.parking"></ion-checkbox> parking </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.elevator"></ion-checkbox> elevator </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.fireplace"></ion-checkbox> fireplace </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.laundry"></ion-checkbox> laundry </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.jacuzzi"></ion-checkbox> jacuzzi </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.dishwasher"></ion-checkbox> dishwasher </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.pool"></ion-checkbox> pool </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.private_bedroom"></ion-checkbox> private_bedroom </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.phone_jack"></ion-checkbox>phone_jack </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.private_entrance"></ion-checkbox> private_entrance </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.cable_tv_jack"></ion-checkbox> cable_tv_jack </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.private_closet"></ion-checkbox> private_closet </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.internet"></ion-checkbox> internet </ion-col>
+    <ion-col size="4"><ion-checkbox [(ngModel)]="listingData.Rfeatures.wireless_internet"></ion-checkbox> wireless_internet </ion-col>
+</ion-row>
+</ion-grid>
+
+
+<strong>Household</strong>
+<ion-grid>
+  <ion-row>
+    <ion-col size="4">Age: </ion-col>
+    <ion-col size="4">
+    <ion-input placeholder="Min Age" required [(ngModel)]="listingData.household.min_age"></ion-input> 
+    </ion-col>  <ion-col size="4"> 
+    <ion-input placeholder="Max Age" required [(ngModel)]="listingData.household.max_age"></ion-input> 
+    </ion-col>
+    <ion-col size="6">Household Number: <br>
+    <ion-input placeholder="Number" required [(ngModel)]="listingData.household.household_no"></ion-input></ion-col>
+    <ion-col size="6">Household Sex: <br>
+<ion-select required [(ngModel)]="listingData.household.household_sex" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Sex">
+      <ion-select-option value="Male">Male</ion-select-option>
+      <ion-select-option value="Female">Female</ion-select-option>
+    </ion-select>
+</ion-col>
+</ion-row>
+</ion-grid>
+
+<strong>Residence</strong>
+<ion-grid>
+  <ion-row>
+    <ion-col size="6">Building Type: <br> 
+    <ion-input placeholder="Type" required [(ngModel)]="listingData.residence.building_type"></ion-input> 
+	</ion-col>
+    <ion-col size="6">Move-in-fee: <br> 
+    <ion-input placeholder="Fee" required [(ngModel)]="listingData.residence.move_in_fee"></ion-input> 
+   </ion-col>
+    <ion-col size="6">Utilities Cost: <br> 
+    <ion-input placeholder="Cost" required [(ngModel)]="listingData.residence.utilities_cost"></ion-input> 
+	</ion-col>
+    <ion-col size="6">Parking Rent:<br>  
+    <ion-input placeholder="Rent" required [(ngModel)]="listingData.residence.parking_rent"></ion-input> 
+</ion-col>
+</ion-row>
+</ion-grid>
+
+<strong>Lifestyle</strong>
+<ion-grid>
+  <ion-row>
+   <ion-col size="6">My Cleanliness: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.cleanliness" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Average">Average</ion-select-option>
+    </ion-select>
+</ion-col>
+<ion-col size="6">Overnight Guests: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.overnight_guests" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Rarely">Rarely</ion-select-option>
+    </ion-select>
+  </ion-col>
+<ion-col size="6">Party Habits: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.party_habits" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Rarely">Rarely</ion-select-option>
+    </ion-select>
+  </ion-col>
+<ion-col size="6">I get up:<br>
+<ion-select required [(ngModel)]="listingData.lifestyle.get_up" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="8AM">8AM</ion-select-option>
+    </ion-select>
+	</ion-col>
+	<ion-col size="6">Go to bed:<br>
+<ion-select required [(ngModel)]="listingData.lifestyle.go_to_bed" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="9PM">9PM</ion-select-option>
+    </ion-select>
+	</ion-col>
+<ion-col size="6">Food preference: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.food_preference" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Fresh">Fresh</ion-select-option>
+    </ion-select>
+</ion-col>
+<ion-col size="6">Smoker: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.smoker" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Outside Only">Outside Only</ion-select-option>
+    </ion-select>
+</ion-col>
+<ion-col size="6">Work Schedule: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.work_schedule" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="9-5">9-5</ion-select-option>
+    </ion-select>
+</ion-col>
+<ion-col size="6">Occupation: <br> 
+<ion-select required [(ngModel)]="listingData.lifestyle.occupation" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Student">Student</ion-select-option>
+    </ion-select>
+</ion-col>
+
+</ion-row>
+</ion-grid>
+	<strong>Pets Owned:</strong>
+<ion-grid>
+  <ion-row>
+    <ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.dogs"></ion-checkbox> Dog
+	</ion-col>
+    <ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.cats"></ion-checkbox> Cat
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.birds"></ion-checkbox> Birds
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.reptiles"></ion-checkbox> Reptiles
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.fish"></ion-checkbox> Fish
+	</ion-col>
+	<ion-col size="4">
+	<ion-checkbox [(ngModel)]="listingData.lifestyle.pets_owned.small_pets"></ion-checkbox> Small Pets
+	</ion-col>
+</ion-row>
+
+</ion-grid>
+
+
+<strong>Roommate Preference</strong>
+<ion-grid>
+  <ion-row>
+  	<ion-col size="4">Age: </ion-col>
+    <ion-col size="4">
+    <ion-input placeholder="Min Age" required [(ngModel)]="listingData.roommate_preference.min_age"></ion-input> 
+    </ion-col>  <ion-col size="4"> 
+    <ion-input placeholder="Max Age" required [(ngModel)]="listingData.roommate_preference.max_age"></ion-input> 
+    </ion-col>
+
+<ion-col size="6">Smoker: <br> 
+<ion-select required [(ngModel)]="listingData.roommate_preference.smoker" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="Outside Only">Outside Only</ion-select-option>
+    </ion-select>
+</ion-col>
+<ion-col size="6">Students Only: <br> 
+<ion-select required [(ngModel)]="listingData.roommate_preference.students_only" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="No">No</ion-select-option>
+    </ion-select>
+</ion-col>
+</ion-row>
+</ion-grid>
+	<strong>Preferred Pets:</strong>
+	<ion-grid>
+  <ion-row>
+    <ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.dogs"></ion-checkbox> Dog
+	</ion-col>
+    <ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.cats"></ion-checkbox> Cat
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.birds"></ion-checkbox> Birds
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.reptiles"></ion-checkbox> Reptiles
+	</ion-col>
+	<ion-col size="3">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.fish"></ion-checkbox> Fish
+	</ion-col>
+	<ion-col size="4">
+	<ion-checkbox [(ngModel)]="listingData.roommate_preference.preferred_pets.small_pets"></ion-checkbox> Small Pets
+	</ion-col>
+</ion-row>
+
+</ion-grid>
+
+
+</div>
+</div>
+<div *ngIf="view_type === 'new'">
+<ion-button (click)="submit()" expand="block">Submit</ion-button>
+</div>
+<div *ngIf="view_type !== 'new'">
+<ion-button (click)="submit()" expand="block">Edit</ion-button>
+</div>
 
 </ion-content>

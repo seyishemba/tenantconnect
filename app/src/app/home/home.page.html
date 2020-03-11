@@ -18,14 +18,14 @@
     Requests
   </ion-label>
 </ion-item>
-<ion-item button [routerLink]="['/add-listing']" routerDirection="forward" *ngIf="storedUser.type === 'landlord'">
+<ion-item button [routerLink]="['/add-listing/new']" routerDirection="forward" *ngIf="storedUser.type === 'landlords'">
   <ion-label>
     Add Listing
   </ion-label>
 </ion-item>
-<ion-item button [routerLink]="['/add-request']" routerDirection="forward" *ngIf="storedUser.type === 'tenant'">
+<ion-item button [routerLink]="['/add-request/new']" routerDirection="forward" *ngIf="storedUser.type === 'tenants'">
   <ion-label>
-    Add Requests
+    Add Request
   </ion-label>
 </ion-item>
 <ion-item button [routerLink]="['/listing/owner']" routerDirection="forward" *ngIf="storedUser.type === 'landlord'">

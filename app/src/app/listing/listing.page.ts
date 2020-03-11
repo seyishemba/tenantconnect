@@ -3,6 +3,7 @@ import { PostService } from '../post.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { NavController  } from '@ionic/angular';
 
 @Component({
   selector: 'app-listing',
@@ -12,16 +13,38 @@ import { ActivatedRoute } from '@angular/router';
 export class ListingPage implements OnInit {
 	listingData = [];
    base_url = 'http://localhost/api';
-   showType = '';
-  constructor(private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+   showType = ''; 
+   storedUser = {
+    username: '',
+    password: '',
+    type: ''    
+     }
+  constructor(public navCtrl: NavController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+   validateUser(){
+  this.pService.validateUser();  
+  var loginJson = this.pService.returnLoginJson();  
+  this.storedUser = loginJson;
+  console.log(this.storedUser); 
+  }
 
    async loadListing(){
+    this.validateUser();
+
    	const loading = await this.loadingCntrl.create({
       message: 'Loading...'
     });
     await loading.present();
-  	var formparams = '?request=listings';
-
+    if (this.showType === 'all') {
+  	var formparams = '?request=listings&type=all';
+     }else{
+      if (this.storedUser.type === 'tenants') {
+        //alert('tenant!');
+    var formparams = '?request=listings&type=all';
+    this.navCtrl.navigateBack('listing/all');
+      }else{
+    var formparams = '?request=listings&type=user&username='+this.storedUser.username;
+      }
+     }
   	this.http.get(this.base_url+formparams, {}, {})
   .then(data => {
 	loading.dismiss();

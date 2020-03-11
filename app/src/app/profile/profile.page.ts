@@ -17,37 +17,43 @@ export class ProfilePage implements OnInit {
 	}
 	profileData = {
 		username: '',
-		password: '',
+    password: '',
+		npassword: '',
 		type: '',
 		contact_number: '',
 		email: '',
 		current_location: '',
 		full_name: '',
 	}
+
+storedUser = {
+  username: '',
+  password: '',
+  type: ''    
+   }
+
    base_url = 'http://localhost/api';
 
   constructor( private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
 
- validateUser(){
+  validateUser(){
   this.pService.validateUser();  
   var loginJson = this.pService.returnLoginJson();  
-  this.loginData = loginJson;
-  console.log(this.loginData);	
+  this.storedUser = loginJson;
+  console.log(this.storedUser); 
   }
+
    async checkProfile(type){
-   this.pService.validateUser();  
-  var loginJson = this.pService.returnLoginJson();  
-  this.loginData = loginJson;
 
    	const loading = await this.loadingCntrl.create({
       message: 'Loading...'
     });
     await loading.present();
     if(type === 'edit'){ 
-  	var formparams = '?request=login&profile=yes&username='+this.loginData.username+'&password='+this.profileData.password+'&type='+this.loginData.type+'&full_name='+this.profileData.full_name+'&contact_number='+this.profileData.contact_number+'&current_location='+this.profileData.current_location;
+  	var formparams = '?request=login&profile&username='+this.profileData.username+'&password='+this.profileData.npassword+'&type='+this.profileData.type+'&full_name='+this.profileData.full_name+'&contact_number='+this.profileData.contact_number+'&current_location='+this.profileData.current_location;
   	console.log(formparams);
     }else{
-  	var formparams = '?request=login&username='+this.loginData.username+'&password='+this.loginData.password+'&type='+this.loginData.type+'&profile=no';
+  	var formparams = '?request=login&username='+this.storedUser.username+'&password='+this.storedUser.password+'&type='+this.storedUser.type+'&validate=profile';
   	}
 
   	this.http.get(this.base_url+formparams, {}, {})
@@ -58,12 +64,18 @@ export class ProfilePage implements OnInit {
     if(type === 'edit'){ 
 
 	 var updatedLoginData = { 
-	 	username: this.loginData.username,
+	 	username: this.profileData.username,
 	 	password: this.profileData.password,
-	 	type: this.loginData.type
+	 	type: this.profileData.type
 	  };
+    this.storedUser.username = this.profileData.username;
+    this.storedUser.password = this.profileData.password;
+    this.storedUser.type = this.profileData.type;
+    
    this.pService.storeLogin(updatedLoginData);
    alert('successfully edited profile');
+    this.checkProfile('check');
+
    }
 
 	if (response_data.response === 'OK') { 
@@ -91,6 +103,8 @@ export class ProfilePage implements OnInit {
   });
    }
  ngOnInit() {
+   this.validateUser();
+
   	this.checkProfile('check');
 
  }

@@ -14,17 +14,17 @@ export class LoginPage{
 	}
   constructor(private pService: PostService) {}
 
-  initiateLogin(){
-  var hmm = this.pService.initiateLogin();  	
+  validateLogin(){
+  var hmm = this.pService.validateLogin('login2');  	
   }
 
   Login(){
-  	var responseData = this.pService.Login(this.loginData);
+  	var responseData = this.pService.Login(this.loginData, 'login');
   	console.log(responseData);
   }
 
   ngOnInit() {
-  	 this.initiateLogin();
+  	 this.validateLogin();
   	//this.Login();
   }
 

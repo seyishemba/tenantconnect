@@ -3,6 +3,7 @@ import { PostService } from '../post.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { NavController  } from '@ionic/angular';
 
 
 @Component({
@@ -15,15 +16,39 @@ export class RequestsPage implements OnInit {
 	requestsData = [];
    base_url = 'http://localhost/api';
    showType = '';
+   storedUser = {
+    username: '',
+    password: '',
+    type: ''    
+     }
 
-  constructor(private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+  constructor(public navCtrl: NavController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+validateUser(){
+  this.pService.validateUser();  
+  var loginJson = this.pService.returnLoginJson();  
+  this.storedUser = loginJson;
+  console.log(this.storedUser); 
+  }
+
 
 async loadrequests(){
+    this.validateUser();
+
    	const loading = await this.loadingCntrl.create({
       message: 'Loading...'
     });
     await loading.present();
-  	var formparams = '?request=requests';
+    if (this.showType === 'all') {
+    var formparams = '?request=requests&type=all';
+     }else{
+      if (this.storedUser.type === 'landlords') {
+        //alert('tenant!');
+    var formparams = '?request=requests&type=all';
+    this.navCtrl.navigateBack('requests/all');
+      }else{
+    var formparams = '?request=requests&type=user&username='+this.storedUser.username;
+      }
+     }
 
   	this.http.get(this.base_url+formparams, {}, {})
   .then(data => {

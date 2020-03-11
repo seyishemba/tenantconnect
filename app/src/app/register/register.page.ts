@@ -8,6 +8,7 @@ import { PostService } from '../post.service';
 })
 export class RegisterPage implements OnInit {
 	loginData = {
+    email: '',
 		username: '',
 		password: '',
 		type: ''
