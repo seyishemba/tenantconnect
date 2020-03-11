@@ -18,6 +18,20 @@ class Homepage extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct(){ 
+	    parent::__construct();
+	  	$this->load->helper('url');
+    	$this->load->helper('string');
+
+    	function encode_url($url){
+			$url = preg_replace("![^a-z0-9]+!i", "-",strtolower(urlencode($url)));
+			return trim($url);
+		}
+    	date_default_timezone_set('Africa/Lagos');
+    	$this->load->database();
+    	 //get all users
+	}
+	
 	public function index(){
 		header('Access-Control-Allow-Origin: *');  
 		header('Access-Control-Allow-Origin: *');
