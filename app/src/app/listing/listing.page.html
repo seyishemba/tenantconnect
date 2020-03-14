@@ -1,15 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>listing</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-	{{showType}}
-	
-	<ion-item button *ngFor="let listing of listingData">
-    <ion-label routerLink="/view-listing/{{listing.id}}" routerDirection="forward"> {{listing.title}}</ion-label>
+	<div style="padding: 8px 20px" *ngIf="showType === 'all'">
+		<h2 style="font-weight: bold">Showing all recent listings</h2>
+	</div>
+	<div style="padding: 8px 20px" *ngIf="showType !== 'all'">
+		<h2 style="font-weight: bold">Showing all your listings</h2>
+	</div>
+	<div button *ngFor="let listing of listingData">
+		<ion-card routerLink="/view-listing/{{listing.id}}" routerDirection="forward">
+			<div style="width: 100%; background: linear-gradient( rgba(0,0,0,.3), rgba(0,0,0,.5) ), url(../../assets/images/landlord_login.jpg);background-size: cover; padding: 10px; height: 150px;">
+				<div style="width: 30%;float: left; display: inline-block;">
+    <ion-button fill="color" slot="end">{{listing.sub_building_type}}</ion-button>
+				</div>
+				<div style="width: 40%;float: right; display: inline-block;">
+					<span style="width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    background: #000000a6;
+    color: white;
+    float: right;
+    padding: 32px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;">
+						{{listing.amount}}
+						<br><span style="font-size: 11px">/{{listing.duration}}</span>
+					</span>
+				</div>
+				
+			</div>
+	<ion-card-header>
+    <ion-card-title>{{listing.title}}</ion-card-title>
+     <ion-item>
+     	<ion-icon slot="start" name="location-outline" style="
    
+    "></ion-icon>
+    <ion-label>{{listing.location}}</ion-label>
   </ion-item>
+
+    
+  </ion-card-header>
+</ion-card>
+
+  </div>
 
 </ion-content>

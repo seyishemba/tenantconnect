@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
+    <div *ngIf="view_type === 'new'">
     <ion-title>Add Request</ion-title>
+  </div>
+  <div *ngIf="view_type !== 'new'">
+    <ion-title>Edit Request</ion-title>
+  </div>
   </ion-toolbar>
 </ion-header>
 
@@ -37,7 +42,7 @@
 
 <ion-card>
   <ion-item class="ion-activated">
-    <ion-icon name="wifi" slot="start"></ion-icon>
+    <ion-icon name="cash-outline" slot="start"></ion-icon>
     <ion-input placeholder="Amount" required [(ngModel)]="requestData.amount"></ion-input> 
      <ion-select required [(ngModel)]="requestData.duration" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Duration">
       <ion-select-option value="Month">Month</ion-select-option>
@@ -45,13 +50,15 @@
     </ion-select>
   </ion-item>
   <ion-item >
-    <ion-icon name="wine" slot="start"></ion-icon>
+    <ion-icon name="basket" slot="start"></ion-icon>
     <ion-input placeholder="When to move" required [(ngModel)]="requestData.when_to_move"></ion-input> 
 
   </ion-item>
 
   <ion-item class="ion-activated">
-    <ion-icon name="warning" slot="start"></ion-icon>
+    <ion-icon name="bed" slot="start"></ion-icon>
+  <ion-label position="floating">Furnished: </ion-label>
+
      <ion-select required [(ngModel)]="requestData.furnished" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Furnished">
       <ion-select-option value="Yes">Yes</ion-select-option>
       <ion-select-option value="No">No</ion-select-option>
@@ -59,7 +66,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-icon name="walk" slot="start"></ion-icon>
+    <ion-icon name="move" slot="start"></ion-icon>
     <ion-input placeholder="Apartment Size" required [(ngModel)]="requestData.size"></ion-input> 
     <ion-select required [(ngModel)]="requestData.measurement" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Measurement">
       <ion-select-option value="Sq">Sq</ion-select-option>
@@ -89,25 +96,25 @@
 <strong>Features</strong>
 <ion-grid>
   <ion-row>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.high_rise"></ion-checkbox> High Rise </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.low_rise"></ion-checkbox> Low Rise </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.disability_access"></ion-checkbox> disability_access </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.door_man"></ion-checkbox> door_man </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.elevator"></ion-checkbox> elevator </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.walkup"></ion-checkbox> walkup </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.health_club"></ion-checkbox> health_club </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.laundromat"></ion-checkbox> laundromat </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.covered_parking"></ion-checkbox> covered_parking </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.garage"></ion-checkbox> garage </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.parking_lot"></ion-checkbox> parking_lot </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.street_parking"></ion-checkbox> street_parking </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.near_bus_stop"></ion-checkbox> near_bus_stop </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.near_subway"></ion-checkbox> near_subway </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.electronic_security"></ion-checkbox> electronic_security </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.security"></ion-checkbox>security </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.swimming_pool"></ion-checkbox> swimming_pool </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.internet"></ion-checkbox> internet </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Hfeatures.wireless_internet"></ion-checkbox> wireless_internet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.high_rise"></ion-checkbox> High Rise </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.low_rise"></ion-checkbox> Low Rise </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.disability_access"></ion-checkbox> Disability access </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.door_man"></ion-checkbox> Doorman </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.elevator"></ion-checkbox> Elevator </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.walkup"></ion-checkbox> Walkup </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.health_club"></ion-checkbox> Health Club </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.laundromat"></ion-checkbox> Laundromat </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.covered_parking"></ion-checkbox> Covered Parking </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.garage"></ion-checkbox> Garage </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.parking_lot"></ion-checkbox> Parking Lot </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.street_parking"></ion-checkbox> Street Parking </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.near_bus_stop"></ion-checkbox> Near Bus Stop </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.near_subway"></ion-checkbox> Near Subway </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.electronic_security"></ion-checkbox> Electronic Security </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.security"></ion-checkbox> Security </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.swimming_pool"></ion-checkbox> Swimming Pool </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.internet"></ion-checkbox> Internet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Hfeatures.wireless_internet"></ion-checkbox> Wireless Internet </ion-col>
 
 </ion-row>
 </ion-grid>
@@ -116,27 +123,27 @@
   <strong>Features</strong>
 <ion-grid>
   <ion-row>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.air_condition"></ion-checkbox> air_condition </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.deck_or_patio"></ion-checkbox> deck_or_patio </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.wood_floors"></ion-checkbox> wood_floors </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.yard"></ion-checkbox> yard </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.carpet"></ion-checkbox> carpet </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.storage"></ion-checkbox> storage </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.gym"></ion-checkbox> gym </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.parking"></ion-checkbox> parking </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.elevator"></ion-checkbox> elevator </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.fireplace"></ion-checkbox> fireplace </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.laundry"></ion-checkbox> laundry </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.jacuzzi"></ion-checkbox> jacuzzi </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.dishwasher"></ion-checkbox> dishwasher </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.pool"></ion-checkbox> pool </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_bedroom"></ion-checkbox> private_bedroom </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.phone_jack"></ion-checkbox>phone_jack </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_entrance"></ion-checkbox> private_entrance </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.cable_tv_jack"></ion-checkbox> cable_tv_jack </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_closet"></ion-checkbox> private_closet </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.internet"></ion-checkbox> internet </ion-col>
-    <ion-col size="4"><ion-checkbox [(ngModel)]="requestData.Rfeatures.wireless_internet"></ion-checkbox> wireless_internet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.air_condition"></ion-checkbox> Air Condition </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.deck_or_patio"></ion-checkbox> Deck or Patio </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.wood_floors"></ion-checkbox> Wood Floors </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.yard"></ion-checkbox> Yard </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.carpet"></ion-checkbox> Carpet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.storage"></ion-checkbox> Storage </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.gym"></ion-checkbox> Gym </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.parking"></ion-checkbox> Parking </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.elevator"></ion-checkbox> Elevator </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.fireplace"></ion-checkbox> Fireplace </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.laundry"></ion-checkbox> Laundry </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.jacuzzi"></ion-checkbox> Jacuzzi </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.dishwasher"></ion-checkbox> Dishwasher </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.pool"></ion-checkbox> Pool </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_bedroom"></ion-checkbox> Private Bedroom </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.phone_jack"></ion-checkbox>Phone Jack </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_entrance"></ion-checkbox> Private Entrance </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.cable_tv_jack"></ion-checkbox> Cable TV jack </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.private_closet"></ion-checkbox> Private Closet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.internet"></ion-checkbox> Internet </ion-col>
+    <ion-col size="6"><ion-checkbox [(ngModel)]="requestData.Rfeatures.wireless_internet"></ion-checkbox> Wireless Internet </ion-col>
 </ion-row>
 </ion-grid>
 
@@ -144,10 +151,10 @@
 <strong>Household</strong>
 <ion-grid>
   <ion-row>
-    <ion-col size="4">Age: </ion-col>
-    <ion-col size="4">
+    <ion-col size="6">Age: </ion-col>
+    <ion-col size="6">
     <ion-input placeholder="Min Age" required [(ngModel)]="requestData.household.min_age"></ion-input> 
-    </ion-col>  <ion-col size="4"> 
+    </ion-col>  <ion-col size="6"> 
     <ion-input placeholder="Max Age" required [(ngModel)]="requestData.household.max_age"></ion-input> 
     </ion-col>
     <ion-col size="6">Household Number: <br>
@@ -248,7 +255,7 @@
   <ion-col size="3">
   <ion-checkbox [(ngModel)]="requestData.lifestyle.pets_owned.fish"></ion-checkbox> Fish
   </ion-col>
-  <ion-col size="4">
+  <ion-col size="6">
   <ion-checkbox [(ngModel)]="requestData.lifestyle.pets_owned.small_pets"></ion-checkbox> Small Pets
   </ion-col>
 </ion-row>
@@ -259,10 +266,10 @@
 <strong>Roommate Preference</strong>
 <ion-grid>
   <ion-row>
-    <ion-col size="4">Age: </ion-col>
-    <ion-col size="4">
+    <ion-col size="6">Age: </ion-col>
+    <ion-col size="6">
     <ion-input placeholder="Min Age" required [(ngModel)]="requestData.roommate_preference.min_age"></ion-input> 
-    </ion-col>  <ion-col size="4"> 
+    </ion-col>  <ion-col size="6"> 
     <ion-input placeholder="Max Age" required [(ngModel)]="requestData.roommate_preference.max_age"></ion-input> 
     </ion-col>
 
@@ -296,7 +303,7 @@
   <ion-col size="3">
   <ion-checkbox [(ngModel)]="requestData.roommate_preference.preferred_pets.fish"></ion-checkbox> Fish
   </ion-col>
-  <ion-col size="4">
+  <ion-col size="6">
   <ion-checkbox [(ngModel)]="requestData.roommate_preference.preferred_pets.small_pets"></ion-checkbox> Small Pets
   </ion-col>
 </ion-row>

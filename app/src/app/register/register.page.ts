@@ -13,6 +13,8 @@ export class RegisterPage implements OnInit {
 		password: '',
 		type: ''
 	}
+  background = 'url("../../assets/images/landlord_login.jpg")';
+
   constructor(private pService: PostService) {}
 
   Register(){

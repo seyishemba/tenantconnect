@@ -44,6 +44,10 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
+  {
+    path: 'view-connection/:id',
+    loadChildren: () => import('./view-connection/view-connection.module').then( m => m.ViewConnectionPageModule)
+  },
 ];
 
 @NgModule({

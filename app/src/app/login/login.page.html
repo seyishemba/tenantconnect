@@ -1,11 +1,25 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-	 
+	<div [ngStyle]="{'background-image': background }" class="body">
+    <div style="background: rgba(0,0,0,.5); width: 100%; position: relative; height: 100%; padding: 10px">
+
+      <div style="padding: 30px 0px; text-align: center;
+    
+    color: #efefef;
+    ">
+        <img src="../../assets/images/logo.png" width="100px"><br>
+        <p style="color: #5fff45; font-size: 24px;margin-bottom:0px;font-weight: bold;"> Welcome to Tenant Connect.</p>
+        <p style="font-size: 18px"> Choose your account type and login to continue.</p>
+      </div>
+  <!-- Default Segment -->
+<ion-segment style="background: #efefef" [(ngModel)]="loginData.type" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="tenants">
+    <ion-label>Tenant</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="landlords">
+    <ion-label>Landlord</ion-label>
+  </ion-segment-button>
+</ion-segment>
 <ion-item>
   <ion-label position="floating">Username</ion-label>
   <ion-input [(ngModel)]="loginData.username"></ion-input>
@@ -15,14 +29,24 @@
   <ion-label position="floating">Password</ion-label>
   <ion-input [(ngModel)]="loginData.password"></ion-input>
 </ion-item>
-	 
-<ion-item>
-  <ion-label position="floating">Type</ion-label>
-  <ion-input [(ngModel)]="loginData.type"></ion-input>
-</ion-item>
 
+<div style="
+background: #e2e2e240;
+    padding: 10px 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    color:white;
+    border-radius: 4px;
+">
 
-<ion-button (click)="Login()" expand="block">Login</ion-button>
-
+<ion-button (click)="Login()" expand="block" color="light">Login</ion-button>
+<br>
+<strong>Don't have an account?</strong>
+<hr>
 <ion-button [routerLink]="['/register']" routerDirection="forward" expand="block">Register</ion-button>
+
+</div>
+
+</div></div>
 </ion-content>

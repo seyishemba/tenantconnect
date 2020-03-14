@@ -1,13 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>requests</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 
 <ion-content>
-	{{showType}}
-	<ion-item button *ngFor="let requests of requestsData">
-    <ion-label routerLink="/view-request/{{requests.id}}" routerDirection="forward"> {{requests.title}}</ion-label>
+	<div style="padding: 8px 20px" *ngIf="showType === 'all'">
+		<h2 style="font-weight: bold">Showing all recent requests</h2>
+	</div>
+	<div style="padding: 8px 20px" *ngIf="showType !== 'all'">
+		<h2 style="font-weight: bold">Showing all your requests</h2>
+	</div>
+	<div button *ngFor="let request of requestsData">
+		<ion-card routerLink="/view-request/{{request.id}}" routerDirection="forward">
+			<div style="width: 100%; background: linear-gradient( rgba(0,0,0,.85), rgba(0,0,0,.85) ), url(../../assets/images/landlord_login.jpg);background-size: cover; padding: 10px; height: 150px;">
+				<div style="width: 30%;float: left; display: inline-block;">
+    <ion-button fill="color" slot="end">{{request.sub_building_type}}</ion-button>
+				</div>
+				<div style="width: 40%;float: right; display: inline-block;">
+					<span style="width: 90px;
+    height: 90px;
+    border-radius: 100%;
+    background: #000000a6;
+    color: white;
+    float: right;
+    padding: 32px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;">
+						{{request.amount}}
+						<br><span style="font-size: 11px">/{{request.duration}}</span>
+					</span>
+				</div>
+				
+			</div>
+	<ion-card-header>
+    <ion-card-title>{{request.title}}</ion-card-title>
+     <ion-item>
+     	<ion-icon slot="start" name="location-outline" style="
    
+    "></ion-icon>
+    <ion-label>{{request.location}}</ion-label>
   </ion-item>
+
+    
+  </ion-card-header>
+</ion-card>
+
+  </div>
+
 </ion-content>

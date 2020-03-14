@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+  	 <ion-list>
+ 	<ion-item>
+          <ion-avatar slot="start">
+            <img src="https://lh3.googleusercontent.com/a-/AAuE7mDwgNe8zccQ9detlZpCLBLqehOzUXIDalpeQG2r-A=s96-c">
+          </ion-avatar>
+          <ion-label>
+            <h2>Olumide</h2>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+    <!--<ion-title>view_connection</ion-title>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<div style="height: 85%; width: 100%; padding: 20px; background: #f9f9f9; overflow-y: scroll;">
+		<div *ngFor="let message of messages">
+			<div *ngIf="message.sender === storedUser.username" style="width: 90%; float: right; padding: 20px; background: #f3f3f3bf; margin-bottom: 10px">
+				{{message.content}}
+			</div>
+			<div *ngIf="message.sender !== storedUser.username" style="width: 90%; float: left; padding: 20px; background: white; margin-bottom: 10px">
+				{{message.content}}
+			</div>
+		</div>
+	</div>
+
+	<div style="height: 8%; width: 100%; padding: 10px; background: white">
+		<ion-grid>
+		  <ion-row>
+		    <ion-col size="9">
+    <ion-input placeholder="Chat..." required [(ngModel)]="new_message"></ion-input> 
+		    </ion-col>
+		    <ion-col size="3">
+		    	<ion-button color="primary" (click)="send_message()">Send</ion-button>
+		    </ion-col>
+		</ion-row>
+		</ion-grid>
+    
+	</div>
+
+</ion-content>

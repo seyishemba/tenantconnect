@@ -1,33 +1,60 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-	 
+
+  <div [ngStyle]="{'background-image': background }" class="body">
+    <div style="background: rgba(0,0,0,.5); width: 100%; position: relative; height: 100%; padding: 10px">
+
+      <div style="padding: 30px 0px; text-align: center;
+    
+    color: #efefef;
+    ">
+        <img src="../../assets/images/logo.png" width="50px"><br>
+        <p style="font-size: 24px; color: #5fff45; margin-bottom:0px;font-weight: bold;">Create your Account.</p>
+        <p style="font-size: 18px"> Fill in all required info to continue.</p>
+      </div>
+  <!-- Default Segment -->
 <ion-item>
   <ion-label position="floating">Email</ion-label>
-  <ion-input [(ngModel)]="loginData.email"></ion-input>
+  <ion-input required [(ngModel)]="loginData.email"></ion-input>
 </ion-item>
-	 
+   
 <ion-item>
   <ion-label position="floating">Username</ion-label>
-  <ion-input [(ngModel)]="loginData.username"></ion-input>
+  <ion-input required [(ngModel)]="loginData.username"></ion-input>
 </ion-item>
    
 <ion-item>
   <ion-label position="floating">Password</ion-label>
-  <ion-input [(ngModel)]="loginData.password"></ion-input>
+  <ion-input required [(ngModel)]="loginData.password"></ion-input>
 </ion-item>
-	 
+   
 <ion-item>
-  <ion-label position="floating">Type</ion-label>
-  <ion-input [(ngModel)]="loginData.type"></ion-input>
+  <ion-label position="floating">Account Type</ion-label>
+
+  <ion-select required required [(ngModel)]="loginData.type" [interfaceOptions]="customAlertOptions" interface="alert" placeholder="Tenant or Landlord?">
+      <ion-select-option value="tenants">Tenant</ion-select-option>
+      <ion-select-option value="landlords">Landlord</ion-select-option>
+    </ion-select>
 </ion-item>
 
+<div style="
+background: #e2e2e240;
+    padding: 10px 10px;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    color:white;
+    border-radius: 4px;
+">
+<ion-button (click)="Register()" expand="block" color="light">Register</ion-button>
 
-<ion-button (click)="Register()" expand="block">Register</ion-button>
-
+<br>
+<strong>Already have an account?</strong>
+<hr>
 <ion-button [routerLink]="['/login']" routerDirection="backward" expand="block">Login</ion-button>
+
+
+</div>
+
+</div></div>
+
 </ion-content>

@@ -1,9 +1,33 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>connections</ion-title>
+    <ion-title>Connections</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+	  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+    <ion-list>
+    	<div *ngFor="let connection of connections">
+ 	<ion-item button routerLink="/view-connection/{{connection.id}}" routerDirection="forward">
+          <ion-avatar slot="start">
+            <img src="https://lh3.googleusercontent.com/a-/AAuE7mDwgNe8zccQ9detlZpCLBLqehOzUXIDalpeQG2r-A=s96-c">
+          </ion-avatar>
+          <ion-label>
+            <h2><strong>{{connection.sender}}</strong></h2>
+            <h3>{{connection.last_message}}</h3>
+            <p>9:51pm</p>
+
+          </ion-label>
+        </ion-item>
+    </div>
+    </ion-list>
 
 </ion-content>

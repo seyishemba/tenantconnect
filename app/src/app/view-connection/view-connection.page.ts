@@ -6,14 +6,14 @@ import { LoadingController } from '@ionic/angular';
 import { NavController  } from '@ionic/angular';
 
 @Component({
-  selector: 'app-connections',
-  templateUrl: './connections.page.html',
-  styleUrls: ['./connections.page.scss'],
+  selector: 'app-view-connection',
+  templateUrl: './view-connection.page.html',
+  styleUrls: ['./view-connection.page.scss'],
 })
+export class ViewConnectionPage implements OnInit {
 
-export class ConnectionsPage implements OnInit {
-connections = [];
-
+	messages = [];
+	connectionId = '';
    base_url = 'http://localhost/api';
 
    storedUser = {
@@ -21,9 +21,10 @@ connections = [];
     password: '',
     type: ''    
      }
+     new_message = '';
   constructor(private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController, public navCtrl: NavController) {}
 
-   validateUser(){
+ validateUser(){
   this.pService.validateUser();  
   var loginJson = this.pService.returnLoginJson();  
   this.storedUser = loginJson;
@@ -31,7 +32,7 @@ connections = [];
   }
 
 
-   async getConnections(){
+   async getMessages(){
     this.validateUser();
 
    	const loading = await this.loadingCntrl.create({
@@ -39,7 +40,7 @@ connections = [];
     });
     await loading.present();
     
-    var formparams = '?request=connections&username='+this.storedUser.username+'&type='+this.storedUser.type;
+    var formparams = '?request=view_connection&id='+this.connectionId;
 
     console.log(formparams);
 
@@ -47,7 +48,7 @@ connections = [];
   .then(data => {
 	loading.dismiss();
 	 let response_data = JSON.parse(data.data);
-	 this.connections = response_data.responseData;
+	 this.messages = response_data.responseData;
 	if (response_data.response === 'OK') { 
 
 	}
@@ -60,7 +61,52 @@ connections = [];
     console.log(data.status);
     console.log(data.data); // data received by server
     console.log(data.headers);
-    console.log(this.connections)
+    console.log(this.messages)
+
+  })
+  .catch(error => {
+	loading.dismiss();
+  	alert('Unknown error occured. Check your internet connection')
+    console.log(error.status);
+    console.log(error.error); // error message as string
+    console.log(error.headers);
+
+  });
+   }
+
+
+   async send_message(){
+    this.validateUser();
+
+   	const loading = await this.loadingCntrl.create({
+      message: 'Loading...'
+    });
+    await loading.present();
+    
+    var formparams = '?request=send_message&thread_id='+this.connectionId+'&sender='+this.storedUser.username+'&content='+this.new_message;
+    this.new_message = '';
+    console.log(formparams);
+
+  	this.http.get(this.base_url+formparams, {}, {})
+  .then(data => {
+	loading.dismiss();
+	 let response_data = JSON.parse(data.data);
+	 this.messages = response_data.responseData;
+	if (response_data.response === 'OK') { 
+		alert('sent!');
+    this.getMessages();
+
+	}
+	else if (response_data.response === 'error') { 
+		alert(response_data.response_message);
+	}
+	else{
+		alert('An unknown error occured');
+	}
+    console.log(data.status);
+    console.log(data.data); // data received by server
+    console.log(data.headers);
+    console.log(this.messages)
 
   })
   .catch(error => {
@@ -82,7 +128,9 @@ connections = [];
     }, 2000);
   }
   ngOnInit() {
-    this.getConnections();
+   this.connectionId = this.activatedRoute.snapshot.paramMap.get('id');
+
+    this.getMessages();
 
   }
 
