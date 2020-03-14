@@ -77,6 +77,14 @@ header("Access-Control-Allow-Methods: GET, OPTIONS");
 			case 'connections':
 			include 'connections.php';
 				break;
+
+			case 'view_connection':
+			include 'view_connection.php';
+				break;
+
+			case 'send_message':
+			include 'send_message.php';
+				break;
 			
 			default:
 				# code...
