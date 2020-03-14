@@ -1,5 +1,8 @@
 <?php
-
+		$main['move_in_fee'] = $_GET['move_in'];
+		$main['utilities_cost'] = $_GET['utilities'];
+		$main['parking_rent'] = $_GET['park_rent'];
+		
 		$this->db->insert('listing', $main);
 		$post_id = $this->db->insert_id();
 		
@@ -29,6 +32,17 @@
 			);
 		$this->db->insert('amenities_room_listing', $amenities_listing);
 
+
+
+		$household = array(
+			'min_age' => $_GET['h_min_age'], 
+	    		'max_age' => $_GET['h_max_age'], 
+	    		'household_number' => $_GET['h_no'], 
+	    		'household_sex' => $_GET['house_sex'], 
+	    		'listing_id' => $post_id 
+	    	);
+		
+		$this->db->insert('house_hold_listing', $household); 
 
 
 		$household = array(

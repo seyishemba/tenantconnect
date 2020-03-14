@@ -176,7 +176,7 @@ requestData = {
 
     formparams+='&h_min_age='+this.requestData.household.min_age+'&h_max_age='+this.requestData.household.max_age+'&h_no='+this.requestData.household.household_no+'&house_sex='+this.requestData.household.household_sex;
 
-    formparams+='&building='+this.requestData.residence.building_type+'&move_in='+this.requestData.residence.move_in_fee+'&utilities='+this.requestData.residence.utilities_cost+'&park_rent='+this.requestData.residence.parking_rent;
+    formparams+='&building='+this.requestData.building_type+'&move_in='+this.requestData.residence.move_in_fee+'&utilities='+this.requestData.residence.utilities_cost+'&park_rent='+this.requestData.residence.parking_rent;
 
     formparams+='&clean='+this.requestData.lifestyle.cleanliness+'&guests='+this.requestData.lifestyle.overnight_guests+'&party='+this.requestData.lifestyle.party_habits+'&get_up='+this.requestData.lifestyle.get_up+'&go_to_bed='+this.requestData.lifestyle.go_to_bed+'&food_preference='+this.requestData.lifestyle.food_preference+'&smoker='+this.requestData.lifestyle.smoker+'&work_schedule='+this.requestData.lifestyle.work_schedule+'&occupation='+this.requestData.lifestyle.occupation;
 

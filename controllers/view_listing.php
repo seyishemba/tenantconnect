@@ -7,6 +7,14 @@
 				'responseData' =>
 					 $listing,
 					);
+	$owner = $this->db->select('*')->from('landlords')->where('id',$listing['landlord_id'])->get()->row_array();
+
+			$data['responseData']['owner'] = array(
+				'username' => $owner['username'], 
+				'photo' => $owner['photo'], 
+				'type' => $owner['email']
+			);
+
 			if ($listing['property_type'] === 'Place' || $listing['property_type'] === 'House') {
 				if (isset($_GET['check'])) {
 				include 'house_listing_check.php';

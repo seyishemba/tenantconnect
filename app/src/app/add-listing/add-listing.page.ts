@@ -175,7 +175,7 @@ listingData = {
 
     formparams+='&h_min_age='+this.listingData.household.min_age+'&h_max_age='+this.listingData.household.max_age+'&h_no='+this.listingData.household.household_no+'&house_sex='+this.listingData.household.household_sex;
 
-    formparams+='&building='+this.listingData.residence.building_type+'&move_in='+this.listingData.residence.move_in_fee+'&utilities='+this.listingData.residence.utilities_cost+'&park_rent='+this.listingData.residence.parking_rent;
+    formparams+='&building='+this.listingData.building_type+'&move_in='+this.listingData.residence.move_in_fee+'&utilities='+this.listingData.residence.utilities_cost+'&park_rent='+this.listingData.residence.parking_rent;
 
     formparams+='&clean='+this.listingData.lifestyle.cleanliness+'&guests='+this.listingData.lifestyle.overnight_guests+'&party='+this.listingData.lifestyle.party_habits+'&get_up='+this.listingData.lifestyle.get_up+'&go_to_bed='+this.listingData.lifestyle.go_to_bed+'&food_preference='+this.listingData.lifestyle.food_preference+'&smoker='+this.listingData.lifestyle.smoker+'&work_schedule='+this.listingData.lifestyle.work_schedule+'&occupation='+this.listingData.lifestyle.occupation;
 

@@ -13,6 +13,8 @@ import { NavController  } from '@ionic/angular';
 export class ViewConnectionPage implements OnInit {
 
 	messages = [];
+	userdetails = {};
+	usertype = {};
 	connectionId = '';
    base_url = 'http://localhost/api';
 
@@ -40,7 +42,7 @@ export class ViewConnectionPage implements OnInit {
     });
     await loading.present();
     
-    var formparams = '?request=view_connection&id='+this.connectionId;
+    var formparams = '?request=view_connection&receiver='+this.connectionId+'&sender='+this.storedUser.username+'&type='+this.storedUser.type;
 
     console.log(formparams);
 
@@ -48,7 +50,9 @@ export class ViewConnectionPage implements OnInit {
   .then(data => {
 	loading.dismiss();
 	 let response_data = JSON.parse(data.data);
-	 this.messages = response_data.responseData;
+	 this.userdetails = response_data.responseData.receiver;
+	 this.usertype = response_data.responseData.usertype;
+	 this.messages = response_data.responseData.messages;
 	if (response_data.response === 'OK') { 
 
 	}
@@ -83,7 +87,8 @@ export class ViewConnectionPage implements OnInit {
     });
     await loading.present();
     
-    var formparams = '?request=send_message&thread_id='+this.connectionId+'&sender='+this.storedUser.username+'&content='+this.new_message;
+    var formparams = '?request=send_message&receiver='+this.connectionId+'&sender='+this.storedUser.username+'&type='+this.storedUser.type+'&content='+this.new_message;
+
     this.new_message = '';
     console.log(formparams);
 

@@ -6,9 +6,8 @@
     <ion-col size="9">
       {{listingData.title}}
     </ion-col>
-    <ion-col size="3" style="padding: 0px; font-size: 24px; text-align: right;" (click)="actions()">
+    <ion-col size="3" *ngIf="listingData.owner.username === storedUser.username" style="padding: 0px; font-size: 24px; text-align: right;" (click)="actions()">
       <ion-icon name="ellipsis-vertical"></ion-icon>
-
   </ion-col>
 </ion-row>
 </ion-grid>
@@ -178,13 +177,16 @@
     bottom: -2px;
     border-top: 1px solid #ddd;
     z-index: 1000000;">
-  <ion-item button routerLink="/connections/" routerDirection="forward">
+  <ion-item button routerLink="/view-connection/{{listingData.owner.username}}" routerDirection="forward">
           <ion-avatar slot="start">
-            <img src="https://lh3.googleusercontent.com/a-/AAuE7mDwgNe8zccQ9detlZpCLBLqehOzUXIDalpeQG2r-A=s96-c">
+            <img *ngIf="listingData.owner.type === 'Google' || listingData.owner.type === 'Facebook'" src="{{listingData.owner.photo}}">
+
+            <img *ngIf="listingData.owner.type !== 'Google' || listingData.owner.type !== 'Facebook'" src="https://tenantconnect.ie/assets/images/profile/landlord/{{listingData.owner.photo}}">
+
           </ion-avatar>
           <ion-label>
             <h2><strong>Posted by:</strong></h2>
-            <h3>Olumide</h3>
+            <h3>{{listingData.owner.username}}</h3>
           </ion-label>
     <ion-button color="dark" slot="end">Connect</ion-button>
 

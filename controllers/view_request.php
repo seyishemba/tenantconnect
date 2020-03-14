@@ -7,6 +7,13 @@
 				'responseData' =>
 					 $request,
 					);
+	$owner = $this->db->select('*')->from('tenants')->where('id',$request['tenant_id'])->get()->row_array();
+
+	$data['responseData']['owner'] = array(
+				'username' => $owner['username'], 
+				'photo' => $owner['photo'], 
+				'type' => $owner['email']
+			);
 			if ($request['property_type'] === 'Place' || $request['property_type'] === 'House') {
 				if (isset($_GET['check'])) {
 				include 'house_request_check.php';

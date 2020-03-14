@@ -90,6 +90,11 @@
    </h5>
     <ion-input placeholder="Select Amount" required [(ngModel)]="requestData.bathrooms"></ion-input> 
     </ion-col>
+     <ion-col size="6">
+       <h5 style="text-align: center;">Building Type:
+   </h5>
+    <ion-input placeholder="Type" required [(ngModel)]="requestData.building_type"></ion-input>
+  </ion-col>
 </ion-row>
 </div>
 <div style="padding: 20px" *ngIf="requestData.property_type === 'House' || requestData.property_type === 'Place'">
@@ -172,7 +177,7 @@
 <ion-grid>
   <ion-row>
     <ion-col size="6">Building Type: <br> 
-    <ion-input placeholder="Type" required [(ngModel)]="requestData.residence.building_type"></ion-input> 
+    <ion-input placeholder="Type" required [(ngModel)]="requestData.building_type"></ion-input> 
   </ion-col>
     <ion-col size="6">Move-in-fee: <br> 
     <ion-input placeholder="Fee" required [(ngModel)]="requestData.residence.move_in_fee"></ion-input> 

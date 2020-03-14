@@ -1,5 +1,8 @@
 <?php
-
+		$main['move_in_fee'] = $_GET['move_in'];
+		$main['utilities_cost'] = $_GET['utilities'];
+		$main['parking_rent'] = $_GET['park_rent'];
+		
 		$this->db->insert('requests', $main);
 		$post_id = $this->db->insert_id();
 		

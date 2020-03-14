@@ -9,6 +9,8 @@
 	    'slug' => encode_url($_GET['title']),
 		'location' => $_GET['location'],
 		'description' => $_GET['description'],
+		'building_type' => $_GET['building'],
+		'sub_building_type' => $_GET['building'],
 		'amount' => $_GET['amount'],
 		'duration' => $_GET['duration'],
 		'when_to_move' => $_GET['when_to_move'],

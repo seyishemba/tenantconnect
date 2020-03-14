@@ -16,15 +16,15 @@
 
     <ion-list>
     	<div *ngFor="let connection of connections">
- 	<ion-item button routerLink="/view-connection/{{connection.id}}" routerDirection="forward">
+ 	<ion-item button routerLink="/view-connection/{{connection.username}}" routerDirection="forward">
           <ion-avatar slot="start">
-            <img src="https://lh3.googleusercontent.com/a-/AAuE7mDwgNe8zccQ9detlZpCLBLqehOzUXIDalpeQG2r-A=s96-c">
+          	 <img *ngIf="connection.photo === 'Google' || connection.photo === 'Facebook'" src="{{connection.photo}}">
+
+            <img *ngIf="connection.photo !== 'Google' || connection.photo !== 'Facebook'" src="https://tenantconnect.ie/assets/images/profile/{{usertype}}/{{connection.photo}}">
+
           </ion-avatar>
           <ion-label>
-            <h2><strong>{{connection.sender}}</strong></h2>
-            <h3>{{connection.last_message}}</h3>
-            <p>9:51pm</p>
-
+            <h2><strong>{{connection.username}}</strong></h2>
           </ion-label>
         </ion-item>
     </div>

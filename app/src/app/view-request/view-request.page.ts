@@ -42,6 +42,7 @@ export class ViewRequestPage implements OnInit {
     "landlord_id":"",   
     "date_added":"",   
     "time_added":"",   
+    "owner":{},  
     "residence":{
       "building_type":"",   
       "move_in_fee":"",   

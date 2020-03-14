@@ -15,6 +15,7 @@ export class ConnectionsPage implements OnInit {
 connections = [];
 
    base_url = 'http://localhost/api';
+   usertype = '';
 
    storedUser = {
     username: '',
@@ -47,7 +48,8 @@ connections = [];
   .then(data => {
 	loading.dismiss();
 	 let response_data = JSON.parse(data.data);
-	 this.connections = response_data.responseData;
+	 this.usertype = response_data.responseData.usertype;
+	 this.connections = response_data.responseData.users;
 	if (response_data.response === 'OK') { 
 
 	}

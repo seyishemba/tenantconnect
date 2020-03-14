@@ -40,7 +40,8 @@ export class ViewListingPage implements OnInit {
     "subscription_plan":"",   
     "landlord_id":"",   
     "date_added":"",   
-    "time_added":"",   
+    "time_added":"",
+    "owner":{},  
     "residence":{
       "building_type":"",   
       "move_in_fee":"",   

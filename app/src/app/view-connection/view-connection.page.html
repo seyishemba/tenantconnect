@@ -3,10 +3,13 @@
   	 <ion-list>
  	<ion-item>
           <ion-avatar slot="start">
-            <img src="https://lh3.googleusercontent.com/a-/AAuE7mDwgNe8zccQ9detlZpCLBLqehOzUXIDalpeQG2r-A=s96-c">
+            <img *ngIf="userdetails.photo === 'Google' || userdetails.photo === 'Facebook'" src="{{userdetails.photo}}">
+
+            <img *ngIf="userdetails.photo !== 'Google' || userdetails.photo !== 'Facebook'" src="https://tenantconnect.ie/assets/images/profile/{{usertype}}/{{userdetails.photo}}">
+
           </ion-avatar>
           <ion-label>
-            <h2>Olumide</h2>
+            <h1><strong>{{userdetails.username}}</strong></h1>
           </ion-label>
         </ion-item>
     </ion-list>
@@ -17,13 +20,26 @@
 <ion-content>
 
 	<div style="height: 85%; width: 100%; padding: 20px; background: #f9f9f9; overflow-y: scroll;">
+		<div class="tenant" *ngIf="storedUser.type === 'tenants'">
 		<div *ngFor="let message of messages">
-			<div *ngIf="message.sender === storedUser.username" style="width: 90%; float: right; padding: 20px; background: #f3f3f3bf; margin-bottom: 10px">
+			<div *ngIf="message.sender === 'tenant'" style="width: 90%; float: right; padding: 20px; background: #f3f3f3bf; margin-bottom: 10px">
 				{{message.content}}
 			</div>
-			<div *ngIf="message.sender !== storedUser.username" style="width: 90%; float: left; padding: 20px; background: white; margin-bottom: 10px">
+			<div *ngIf="message.sender !== 'tenant'" style="width: 90%; float: left; padding: 20px; background: white; margin-bottom: 10px">
 				{{message.content}}
 			</div>
+		</div>
+		</div>
+
+		<div class="landlord" *ngIf="storedUser.type === 'landlords'">
+		<div *ngFor="let message of messages">
+			<div *ngIf="message.sender === 'landlord'" style="width: 90%; float: right; padding: 20px; background: #f3f3f3bf; margin-bottom: 10px">
+				{{message.content}}
+			</div>
+			<div *ngIf="message.sender !== 'landlord'" style="width: 90%; float: left; padding: 20px; background: white; margin-bottom: 10px">
+				{{message.content}}
+			</div>
+		</div>
 		</div>
 	</div>
 
