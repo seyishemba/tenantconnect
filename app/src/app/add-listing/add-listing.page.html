@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-  <div *ngIf="view_type === 'new'">
+       <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+<div *ngIf="view_type === 'new'">
     <ion-title>Add Listing</ion-title>
   </div>
   <div *ngIf="view_type !== 'new'">
@@ -23,7 +26,6 @@
 </div>
 <div>
 <ion-card>
- 
 <ion-item>
   <ion-label position="floating">Title</ion-label>
   <ion-input required [(ngModel)]="listingData.title"></ion-input>
@@ -88,10 +90,14 @@
    </h5>
     <ion-input placeholder="Select Amount" required [(ngModel)]="listingData.bathrooms"></ion-input> 
     </ion-col>
+</ion-row>
+
       <ion-row>
     <ion-col size="6">Building Type: <br> 
     <ion-input placeholder="Type" required [(ngModel)]="listingData.building_type"></ion-input>
+  </ion-col>
 </ion-row>
+
 </div>
 <div style="padding: 20px" *ngIf="listingData.property_type === 'House' || listingData.property_type === 'Place'">
 <strong>Features</strong>

@@ -1,9 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-title>
+     <img [routerLink]="['/home']" routerDirection="forward" src="../../assets/images/logo.png" style="width: 40px; top: 2px; position: relative;display: inline-block;"> 
+<span *ngIf="showType === 'all'">
+     <span (click)="openModal()" style="
+      display: inline-block;
+    position: relative;
+    background: #f2f2f2f2;
+    top: -10px;
+    font-size: 17px;
+    border: 1px solid #f7f7f7;
+    left: 8px;
+    width: 38%;
+    padding: 5px 10px;
+    text-align: center;
+     " button color="light"><ion-icon name="search-outline" style="
+     top: 3px;
+    position: relative;
+    margin-right: 10px
+    "></ion-icon> <span style="margin-right: 5px">Search</span></span>
+    <span (click)="openModal()" style="
+      display: inline-block;
+    position: relative;
+    background: #f2f2f2f2;
+    top: -10px;
+    font-size: 17px;
+    border: 1px solid #f7f7f7;
+    left: 7px;
+    width: 38%;
+    padding: 5px 10px;
+    text-align: center;
+     " button color="light">
+    <span style="margin-left: 5px">Filter</span> <ion-icon name="options-outline" style="
+    top: 3px;
+    position: relative;
+    margin-left: 10px
+    "></ion-icon></span>
+  </span>
 
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 <ion-content>
-	<div style="padding: 8px 20px" *ngIf="showType === 'all'">
-		<h2 style="font-weight: bold">Showing all recent requests</h2>
-	</div>
+<ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
+  <div  *ngIf="showType === 'all'">
+    <div style="padding: 8px 20px; background: #f3f3f3" *ngIf="filterstatus === 'active'">
+    <h4 style="font-weight: bold">Showing "{{filters.title}}" Requests</h4>
+    <h4 style="font-size: 15px"><strong>Filters</strong> - Price: {{filters.price}}  | Date: {{filters.dateadded}} </h4>
+    <h4 style="    margin-top: 0px;font-size: 15px;">Total Results: {{totalresult}}</h4>
+<ion-button (click)="clearfilter()" expand="block" color="light">Clear</ion-button>
+
+    </div>
+    <div style="padding: 8px 20px" *ngIf="filterstatus !== 'active'">
+    <h2 style="font-weight: bold">Showing all recent requests</h2>
+    <h4 style="    margin-top: 0px;font-size: 15px;">Total Results: {{totalresult}}</h4>
+    </div>
+  </div>
+
 	<div style="padding: 8px 20px" *ngIf="showType !== 'all'">
 		<h2 style="font-weight: bold">Showing all your requests</h2>
 	</div>

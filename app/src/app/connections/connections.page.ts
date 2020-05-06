@@ -14,7 +14,7 @@ import { NavController  } from '@ionic/angular';
 export class ConnectionsPage implements OnInit {
 connections = [];
 
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
    usertype = '';
 
    storedUser = {
@@ -75,14 +75,14 @@ connections = [];
   });
    }
 
-  doRefresh(event) {
-    console.log('Begin async operation');
-
+doRefresh(event) {
+    this.getConnections();
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
   }
+
   ngOnInit() {
     this.getConnections();
 

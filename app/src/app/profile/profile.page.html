@@ -1,10 +1,42 @@
 <ion-header>
   <ion-toolbar>
+       <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
     <ion-title>My Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+<ion-item (click)="openModal()">
+    <ion-grid>
+    <ion-row>
+    <ion-col>
+      <img   *ngIf='storedUser.type === "landlords"' src="https://app.tenantconnect.ie/assets/images/profile/landlord/{{profileData.photo}}" alt="">
+      <img   *ngIf='storedUser.type === "tenants"' src="https://app.tenantconnect.ie/assets/images/profile/tenant/{{profileData.photo}}" alt="">
+
+    </ion-col>
+    <ion-col >
+     <ion-button   expand="block" size="small" color="light">
+            Change Photo
+             <ion-icon slot="end" name="pencil"></ion-icon>
+          </ion-button>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+
+        </ion-item>
+  
 <ion-item>
   <ion-label position="floating">Email</ion-label>
   <ion-input [(ngModel)]="profileData.email" ng-disabled='true'></ion-input>
@@ -43,4 +75,24 @@
 
 <ion-button (click)="checkProfile('edit')" expand="block">Edit Profile</ion-button>
 
+
+  <ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button [routerLink]="['/home']" routerDirection="forward">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>Home</ion-label>
+      <!--<ion-badge>6</ion-badge>-->
+    </ion-tab-button>
+
+    <ion-tab-button>
+      <ion-icon name="person" style="color: #5fff45"></ion-icon>
+      <ion-label style="color:#5fff45">My Profile</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button [routerLink]="['/connections']" routerDirection="forward">
+      <ion-icon name="mail-unread-outline"></ion-icon>
+      <ion-label>Connections</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 </ion-content>

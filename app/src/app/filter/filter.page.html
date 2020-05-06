@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search & Filter</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<p style="padding: 4px 14px">
+		Search by title and filter using the options below:
+	</p>
+<ion-item>
+  <ion-label position="floating">Title</ion-label>
+  <ion-input name="title" [(ngModel)]="filters.title"></ion-input>
+</ion-item>
+
+
+ <ion-list>
+        <ion-radio-group [(ngModel)]="filters.price" value="Highest">
+          <ion-list-header>
+            <ion-label>Price</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Highest to Lowest</ion-label>
+            <ion-radio slot="start" color="" value="Highest"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Lowest to Highest</ion-label>
+            <ion-radio slot="start" color="" value="Lowest"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+
+ <ion-list>
+        <ion-radio-group [(ngModel)]="filters.dateadded" value="Newest">
+          <ion-list-header>
+            <ion-label>Date Added</ion-label>
+          </ion-list-header>
+          <ion-item>
+            <ion-label>Newest to Oldest</ion-label>
+            <ion-radio slot="start" color="" value="Newest"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Oldest to Newest</ion-label>
+            <ion-radio slot="start" color="" value="Oldest"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+      </ion-list>
+<ion-button (click)="closeModal()"  expand="block"> Search & Filter </ion-button>
+
+</ion-content>

@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
     <ion-title>
       <ion-grid>
   <ion-row>
-    <ion-col size="9">
+    <ion-col size="10">
       {{listingData.title}}
     </ion-col>
-    <ion-col size="3" *ngIf="listingData.owner.username === storedUser.username" style="padding: 0px; font-size: 24px; text-align: right;" (click)="actions()">
-      <ion-icon name="ellipsis-vertical"></ion-icon>
-  </ion-col>
 </ion-row>
 </ion-grid>
     </ion-title>
@@ -17,6 +17,46 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+   <span *ngIf="listingData.owner.username === storedUser.username">
+         
+          </span>
+    <p style="
+    z-index: 10000;
+    position: absolute;
+    top: 20px;
+    color: white;
+    margin: 0px;
+    font-size: 8px;
+    text-align: center;
+    left: 0;
+    opacity: .7;
+    right: 0;
+    "><span style="background: rgba(0,0,0,.5); padding: 4px 8px; border-radius: 4px">Swipe left or right to change pictures</span></p>
+  <ion-card>
+    <div class="header-banner">
+        <ion-slides class="home-slide" autoplay="3000" loop pager="true">
+          <ion-slide *ngFor="let photo of photos">
+            <img (click)="next(photo.image)" height="100%" src="{{photo.image}}" alt="">
+          </ion-slide>
+        </ion-slides>
+    </div>
+</ion-card>
+<span *ngIf="listingData.owner.username === storedUser.username">
+ <ion-button (click)="openModal()"  expand="block" size="small" color="light">
+            Edit Photos
+             <ion-icon slot="end" name="pencil"></ion-icon>
+          </ion-button>
+          <br>
+</span>
 <div style="padding-bottom: 100px;">
 <ion-card>
 	<ion-card-header>
@@ -136,7 +176,7 @@
       <div *ngIf="pet.show === 'Yes' || pet.show === 'true'">
         <ion-item>
           <ion-avatar slot="end">
-            <img src="https://tenantconnect.ie/assets/icons/pets/{{pet.icon}}" style="    border-radius: 0px;
+            <img src="https://app.tenantconnect.ie/assets/icons/pets/{{pet.icon}}" style="    border-radius: 0px;
     opacity: .8;">
           </ion-avatar>
     <ion-label>{{pet.name}}</ion-label>
@@ -161,7 +201,7 @@
       <div *ngIf="pet.show === 'Yes' || pet.show === 'true'">
         <ion-item>
           <ion-avatar slot="end">
-            <img src="https://tenantconnect.ie/assets/icons/pets/{{pet.icon}}" style="    border-radius: 0px;
+            <img src="https://app.tenantconnect.ie/assets/icons/pets/{{pet.icon}}" style="    border-radius: 0px;
     opacity: .8;">
           </ion-avatar>
     <ion-label>{{pet.name}}</ion-label>
@@ -170,6 +210,17 @@
     </div>
 
 </div>
+
+ <div style="width: 100%; height: 340px">
+            <iframe [src]="cleanSupportURL" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
+  <a href='https://www.google.com/maps/search/?api=1&query={{listingData.latitude}},{{listingData.longitude}}' target="_blank">
+
+           <ion-button expand="block" size="small" color="light">
+            Expand Map
+          </ion-button>
+</a>
+
 <div style="width: 100%;
     padding: 2px 4px;
     position: fixed;
@@ -177,20 +228,57 @@
     bottom: -2px;
     border-top: 1px solid #ddd;
     z-index: 1000000;">
+    <span *ngIf="storedUser.type === 'tenants'">
   <ion-item button routerLink="/view-connection/{{listingData.owner.username}}" routerDirection="forward">
           <ion-avatar slot="start">
             <img *ngIf="listingData.owner.type === 'Google' || listingData.owner.type === 'Facebook'" src="{{listingData.owner.photo}}">
 
-            <img *ngIf="listingData.owner.type !== 'Google' || listingData.owner.type !== 'Facebook'" src="https://tenantconnect.ie/assets/images/profile/landlord/{{listingData.owner.photo}}">
+            <img *ngIf="listingData.owner.type !== 'Google' || listingData.owner.type !== 'Facebook'" src="https://app.tenantconnect.ie/assets/images/profile/landlord/{{listingData.owner.photo}}">
 
           </ion-avatar>
           <ion-label>
             <h2><strong>Posted by:</strong></h2>
             <h3>{{listingData.owner.username}}</h3>
           </ion-label>
+
     <ion-button color="dark" slot="end">Connect</ion-button>
+        </ion-item>
+      </span>
+      <span *ngIf="storedUser.type === 'landlords'">
+  <ion-item >
+          <ion-avatar slot="start">
+            <img *ngIf="listingData.owner.type === 'Google' || listingData.owner.type === 'Facebook'" src="{{listingData.owner.photo}}">
+
+            <img *ngIf="listingData.owner.type !== 'Google' || listingData.owner.type !== 'Facebook'" src="https://app.tenantconnect.ie/assets/images/profile/landlord/{{listingData.owner.photo}}">
+
+          </ion-avatar>
+          <ion-label>
+            <h2><strong>Posted by:</strong></h2>
+            <h3>{{listingData.owner.username}}</h3>
+          </ion-label>
+    <ion-button color="light" slot="end" *ngIf="listingData.owner.username === storedUser.username" (click)="actions()">Manage Listing
+ <ion-icon name="ellipsis-vertical"></ion-icon>
+    </ion-button>
 
         </ion-item>
+      </span>
+
+          <span *ngIf="storedUser.type === ''">
+  <ion-item button (click)="validateUser()">
+          <ion-avatar slot="start">
+            <img *ngIf="listingData.owner.type === 'Google' || listingData.owner.type === 'Facebook'" src="{{listingData.owner.photo}}">
+
+            <img *ngIf="listingData.owner.type !== 'Google' || listingData.owner.type !== 'Facebook'" src="https://app.tenantconnect.ie/assets/images/profile/landlord/{{listingData.owner.photo}}">
+
+          </ion-avatar>
+          <ion-label>
+            <h2><strong>Posted by:</strong></h2>
+            <h3>{{listingData.owner.username}}</h3>
+          </ion-label>
+
+    <ion-button color="dark" slot="end">Connect</ion-button>
+        </ion-item>
+      </span>
 </div>
 </div>
 

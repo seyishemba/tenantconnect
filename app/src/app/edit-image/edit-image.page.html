@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Images</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<div style="padding: 15px">
+	   <p style="margin: 0px; font-weight: 500">When done uploading and editing your pictures, click the close button at the bottom of the page to go back to your listing page.</p>
+	</div>
+          <div style="width: 100%; height: 100%">
+            <iframe [src]="cleanSupportURL" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          </div>
+          <div style="padding: 15px">
+
+
+<ion-button (click)="closeModal()"  expand="block" routerLink="/view-listing/{{value}}" routerDirection="backward"> Close </ion-button>
+</div>
+</ion-content>

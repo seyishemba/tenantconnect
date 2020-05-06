@@ -5,6 +5,12 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { NavController  } from '@ionic/angular';
+import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ModalController } from '@ionic/angular';
+import {EditImagePage} from '../edit-image/edit-image.page';
+import { DomSanitizer } from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-view-listing',
@@ -14,6 +20,10 @@ import { NavController  } from '@ionic/angular';
 export class ViewListingPage implements OnInit {
 
  listingId = null;
+photos=[
+{'image':''}
+];
+ 
  listingData = { 
     "id":"",
     "slug":"",
@@ -105,9 +115,16 @@ export class ViewListingPage implements OnInit {
     password: '',
     type: ''    
      };
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
 
-  constructor(public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+ mapurl = "";
+    cleanSupportURL: any;
+    sanitizer: DomSanitizer;
+
+  constructor(sanitizer: DomSanitizer, public modalCtrl: ModalController, private theInAppBrowser: InAppBrowser, private photoViewer: PhotoViewer, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
+    this.sanitizer = sanitizer;
+
+  }
  validateUser(){
   this.pService.validateUser();  
   var loginJson = this.pService.returnLoginJson();  
@@ -145,6 +162,8 @@ export class ViewListingPage implements OnInit {
 
 
    async showListing(id){
+  this.checkUser();
+    
    	const loading = await this.loadingCntrl.create({
       message: 'Loading...'
     });
@@ -155,7 +174,9 @@ export class ViewListingPage implements OnInit {
   .then(data => {
 	loading.dismiss();
 	 let response_data = JSON.parse(data.data);
-	 this.listingData = response_data.responseData;
+   this.listingData = response_data.responseData;
+   this.photos = response_data.photos;
+	 console.log(this.photos);
 	if (response_data.response === 'OK') { 
     
 	}
@@ -180,10 +201,71 @@ export class ViewListingPage implements OnInit {
 
   });
    }
- ngOnInit() {
+next(img){
+  var theimg = "'"+img+"'";
+this.photoViewer.show(theimg);
+console.log(img);
+console.log("'"+img+"'");
+}
+
+ async openWithInAppBrowser(url : string){
+   /* const modal = await this.modalController.create({
+      //component: ModalPage
+    });
+    return await modal.present();
+    */
+ // var ref = this.theInAppBrowser.create(url, '_blank', 'hardwareback=yes,fullscreen=no,location=no,hideurlbar=yes,zoom=no');
+}
+async openModal() {
+
+const modal = await this.modalCtrl.create({
+      component: EditImagePage,
+      componentProps: { value: this.listingData.id }
+    });
+ modal.onDidDismiss().then((data)=>{
+      this.showListing(this.listingId);
+    });
+    return await modal.present();
+
+// const modalPage = this.modalCtrl.create('');
+ //modalPage.present();
+}
+
+doRefresh(event) {
+
     this.validateUser();
    this.listingId = this.activatedRoute.snapshot.paramMap.get('id');
    this.showListing(this.listingId);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+ionViewWillEnter(){ 
+  console.log('after');
+}
+
+  checkUser(){
+  this.pService.checkUser();  
+  var loginJson = this.pService.returnLoginJson();  
+  this.storedUser = loginJson;
+  console.log(this.storedUser); 
+  }
+
+ ngOnInit() {
+    this.checkUser();
+  
+   this.listingId = this.activatedRoute.snapshot.paramMap.get('id');
+  this.mapurl = "https://app.tenantconnect.ie/show_map/"+this.listingId+'/listings';
+  console.log(this.mapurl);
+  
+  this.cleanSupportURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.mapurl);
+  console.log(this.cleanSupportURL);
+   this.showListing(this.listingId);
+  console.log(this.mapurl);
+
+    
    console.log(this.listingData);
  }
 

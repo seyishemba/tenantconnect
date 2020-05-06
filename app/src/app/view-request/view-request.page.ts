@@ -5,6 +5,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { NavController  } from '@ionic/angular';
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-view-request',
@@ -106,9 +107,15 @@ export class ViewRequestPage implements OnInit {
     password: '',
     type: ''    
      };
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
+ mapurl = "";
+    cleanSupportURL: any;
+    sanitizer: DomSanitizer;
 
-  constructor(public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+  constructor(sanitizer: DomSanitizer, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
+    this.sanitizer = sanitizer;
+
+  }
  
  validateUser(){
   this.pService.validateUser();  
@@ -182,9 +189,34 @@ export class ViewRequestPage implements OnInit {
 
   });
    }
- ngOnInit() {
+doRefresh(event) {
+
     this.validateUser();
    this.requestId = this.activatedRoute.snapshot.paramMap.get('id');
    this.showrequest(this.requestId);
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+  checkUser(){
+  this.pService.checkUser();  
+  var loginJson = this.pService.returnLoginJson();  
+  this.storedUser = loginJson;
+  console.log(this.storedUser); 
+  }
+
+ ngOnInit() {
+    this.checkUser();
+   this.requestId = this.activatedRoute.snapshot.paramMap.get('id');
+    this.mapurl = "https://app.tenantconnect.ie/show_map/"+this.requestId+'/requests';
+  console.log(this.mapurl);
+  
+  this.cleanSupportURL = this.sanitizer.bypassSecurityTrustResourceUrl(this.mapurl);
+  console.log(this.cleanSupportURL);
+   this.showrequest(this.requestId);
+
+ 
  }
 }

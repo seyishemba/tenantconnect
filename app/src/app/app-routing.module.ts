@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   {
     path: 'login',
@@ -47,6 +47,10 @@ const routes: Routes = [
   {
     path: 'view-connection/:id',
     loadChildren: () => import('./view-connection/view-connection.module').then( m => m.ViewConnectionPageModule)
+  },
+  {
+    path: 'edit-avatar',
+    loadChildren: () => import('./edit-avatar/edit-avatar.module').then( m => m.EditAvatarPageModule)
   },
 ];
 

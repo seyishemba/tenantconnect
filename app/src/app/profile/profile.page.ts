@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from '../post.service';
 import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import {EditAvatarPage} from '../edit-avatar/edit-avatar.page';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +17,7 @@ export class ProfilePage implements OnInit {
 		password: '',
 		type: ''
 	}
+
 	profileData = {
 		username: '',
     password: '',
@@ -24,6 +27,8 @@ export class ProfilePage implements OnInit {
 		email: '',
 		current_location: '',
 		full_name: '',
+    photo: '',
+    id:''
 	}
 
 storedUser = {
@@ -32,9 +37,9 @@ storedUser = {
   type: ''    
    }
 
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
 
-  constructor( private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+  constructor(public modalCtrl: ModalController, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
 
   validateUser(){
   this.pService.validateUser();  
@@ -102,6 +107,37 @@ storedUser = {
 
   });
    }
+  doRefresh(event) {
+     this.validateUser();
+
+    this.checkProfile('check');
+
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+async openModal() {
+const modal = await this.modalCtrl.create({
+      component: EditAvatarPage,
+      componentProps: { type: this.storedUser.type, id: this.profileData.id}
+    });
+ modal.onDidDismiss().then((data)=>{
+
+   this.validateUser();
+
+    this.checkProfile('check');
+    });
+    return await modal.present();
+}
+hmm(){ 
+console.log('ss');
+
+}
+Logout(){
+  this.pService.Logout();   
+  }
  ngOnInit() {
    this.validateUser();
 

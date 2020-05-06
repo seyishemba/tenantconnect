@@ -136,7 +136,7 @@ requestData = {
     password: '',
     type: ''    
      };
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
   constructor(private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController, public navCtrl: NavController) {}
 
  validateUser(){
@@ -168,7 +168,7 @@ requestData = {
 
     if (this.requestData.property_type === 'House' || this.requestData.property_type === 'Place') {
 
-    formparams += '&bedrooms='+this.requestData.bedrooms+'&bathrooms='+this.requestData.bathrooms+'&high_rise='+this.requestData.Hfeatures.high_rise+'&low_rise='+this.requestData.Hfeatures.low_rise+'&disability_access='+this.requestData.Hfeatures.disability_access+'&door_man='+this.requestData.Hfeatures.door_man+'&elevator='+this.requestData.Hfeatures.elevator+'&walkup='+this.requestData.Hfeatures.walkup+'&health_club='+this.requestData.Hfeatures.health_club+'&laundromat='+this.requestData.Hfeatures.laundromat+'&covered_parking='+this.requestData.Hfeatures.covered_parking+'&garage='+this.requestData.Hfeatures.garage+'&parking_lot='+this.requestData.Hfeatures.parking_lot+'&street_parking='+this.requestData.Hfeatures.street_parking+'&near_bus_stop='+this.requestData.Hfeatures.near_bus_stop+'&near_subway='+this.requestData.Hfeatures.near_subway+'&electronic_security='+this.requestData.Hfeatures.electronic_security+'&security='+this.requestData.Hfeatures.security+'&swimming_pool='+this.requestData.Hfeatures.swimming_pool+'&internet='+this.requestData.Hfeatures.internet+'&wireless_internet='+this.requestData.Hfeatures.wireless_internet;
+    formparams += '&building='+this.requestData.building_type+'&bedrooms='+this.requestData.bedrooms+'&bathrooms='+this.requestData.bathrooms+'&high_rise='+this.requestData.Hfeatures.high_rise+'&low_rise='+this.requestData.Hfeatures.low_rise+'&disability_access='+this.requestData.Hfeatures.disability_access+'&door_man='+this.requestData.Hfeatures.door_man+'&elevator='+this.requestData.Hfeatures.elevator+'&walkup='+this.requestData.Hfeatures.walkup+'&health_club='+this.requestData.Hfeatures.health_club+'&laundromat='+this.requestData.Hfeatures.laundromat+'&covered_parking='+this.requestData.Hfeatures.covered_parking+'&garage='+this.requestData.Hfeatures.garage+'&parking_lot='+this.requestData.Hfeatures.parking_lot+'&street_parking='+this.requestData.Hfeatures.street_parking+'&near_bus_stop='+this.requestData.Hfeatures.near_bus_stop+'&near_subway='+this.requestData.Hfeatures.near_subway+'&electronic_security='+this.requestData.Hfeatures.electronic_security+'&security='+this.requestData.Hfeatures.security+'&swimming_pool='+this.requestData.Hfeatures.swimming_pool+'&internet='+this.requestData.Hfeatures.internet+'&wireless_internet='+this.requestData.Hfeatures.wireless_internet;
     }
     if (this.requestData.property_type === 'Room') {
 

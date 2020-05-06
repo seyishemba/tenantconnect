@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
-    <div *ngIf="view_type === 'new'">
+       <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+<div *ngIf="view_type === 'new'">
     <ion-title>Add Request</ion-title>
   </div>
   <div *ngIf="view_type !== 'new'">
@@ -8,6 +11,7 @@
   </div>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content>
   <div *ngIf="view_type === 'new'">

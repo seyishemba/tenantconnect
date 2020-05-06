@@ -1,6 +1,6 @@
-<ion-content>
+<ion-content padding class="background">
 
-  <div [ngStyle]="{'background-image': background }" class="body">
+  <div>
     <div style="background: rgba(0,0,0,.5); width: 100%; position: relative; height: 100%; padding: 10px">
 
       <div style="padding: 30px 0px; text-align: center;
@@ -24,7 +24,7 @@
    
 <ion-item>
   <ion-label position="floating">Password</ion-label>
-  <ion-input required [(ngModel)]="loginData.password"></ion-input>
+  <ion-input required type="password" [(ngModel)]="loginData.password"></ion-input>
 </ion-item>
    
 <ion-item>

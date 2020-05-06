@@ -1,5 +1,8 @@
 <ion-header>
   <ion-toolbar>
+         <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+      </ion-buttons>
     <ion-title>Connections</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -20,7 +23,7 @@
           <ion-avatar slot="start">
           	 <img *ngIf="connection.photo === 'Google' || connection.photo === 'Facebook'" src="{{connection.photo}}">
 
-            <img *ngIf="connection.photo !== 'Google' || connection.photo !== 'Facebook'" src="https://tenantconnect.ie/assets/images/profile/{{usertype}}/{{connection.photo}}">
+            <img *ngIf="connection.photo !== 'Google' || connection.photo !== 'Facebook'" src="https://app.tenantconnect.ie/assets/images/profile/{{usertype}}/{{connection.photo}}">
 
           </ion-avatar>
           <ion-label>
@@ -30,4 +33,23 @@
     </div>
     </ion-list>
 
+  <ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button [routerLink]="['/home']" routerDirection="forward">
+      <ion-icon name="home" ></ion-icon>
+      <ion-label>Home</ion-label>
+      <!--<ion-badge>6</ion-badge>-->
+    </ion-tab-button>
+
+    <ion-tab-button [routerLink]="['/profile']" routerDirection="forward">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>My Profile</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button >
+      <ion-icon name="mail-unread" style="color: #5fff45"></ion-icon>
+      <ion-label style="color:#5fff45">Connections</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 </ion-content>

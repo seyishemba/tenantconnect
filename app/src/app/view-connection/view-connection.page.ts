@@ -16,7 +16,7 @@ export class ViewConnectionPage implements OnInit {
 	userdetails = {};
 	usertype = {};
 	connectionId = '';
-   base_url = 'http://localhost/api';
+   base_url = 'https://app.tenantconnect.ie/api';
 
    storedUser = {
     username: '',
