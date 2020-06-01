@@ -46,6 +46,9 @@ search(){
   ngOnInit(){
     this.checkUser();
   }
+  ionViewWillEnter (){
+    this.checkUser();
+  }
 
 }
 

@@ -17,7 +17,7 @@
                   	Send us a feedback
             </ion-item>
             <ion-item (click)="share()" >
-            	<ion-icon  name="share-social-outline" slot="start"></ion-icon>
+            	<ion-icon name="share-social-outline" slot="start"></ion-icon>
                   	Recommend to a friend
             </ion-item>
             <p style="padding: 5px 20px">About</p>
@@ -37,32 +37,6 @@
             	<ion-icon name="newspaper-outline" slot="start"></ion-icon>
                   	Terms & Condition
             </ion-item>
-              <ion-item *ngIf="storedLoginJson.type !== ''" style="border: 1px solid #ddd;
-    width: 100%;" button (click)="Logout()">
-    <ion-avatar slot="start">
-    <ion-icon name="power-outline" style="
-    font-size: 30px;
-    color:red;
-    padding-top: 5px;
-    "></ion-icon>
-          </ion-avatar>
-  <ion-label>
-    Logout
-  </ion-label>
-</ion-item>
-    <ion-item *ngIf="storedLoginJson.type === ''" style="border: 1px solid #ddd;
-    width: 100%;" button (click)="Login()">
-    <ion-avatar slot="start">
-    <ion-icon name="power-outline" style="
-    font-size: 30px;
-    color:green;
-    padding-top: 5px;
-    "></ion-icon>
-          </ion-avatar>
-  <ion-label>
-    Login
-  </ion-label>
-</ion-item>
           </ion-menu-toggle>
           </ion-list>
         </ion-content>

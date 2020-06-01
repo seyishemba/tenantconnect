@@ -2,6 +2,7 @@
   <ion-toolbar>
       <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
+
       </ion-buttons>
     <ion-title>
      <img src="../../assets/images/logo.png" style="width: 40px; top: 2px; position: relative;display: inline-block;"> <span (click)="search()" style="
@@ -44,7 +45,7 @@
 <span (click)="search()" [routerLink]="['/listing/all']" routerDirection="forward">
   <ion-toolbar style="    background: transparent;
     opacity: .9;" (click)="search()" [routerLink]="['/listing/all']" routerDirection="forward">
-  <ion-searchbar placeholder="E.g Duplex around Dublin..."></ion-searchbar>
+  <ion-searchbar placeholder="E.g Properties around Dublin..."></ion-searchbar>
 </ion-toolbar>
   </span>
 <hr>
@@ -186,6 +187,10 @@
       <ion-icon name="mail-unread-outline"></ion-icon>
       <ion-label>Connections</ion-label>
     </ion-tab-button>
+    <ion-tab-button (click)="Logout()">
+        <ion-icon name="power-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 </span>
@@ -199,14 +204,14 @@
       <!--<ion-badge>6</ion-badge>-->
     </ion-tab-button>
 
-    <ion-tab-button (click)="validateUser()">
-      <ion-icon name="person-outline"></ion-icon>
-      <ion-label>My Profile</ion-label>
+     <ion-tab-button [routerLink]="['/login']" routerDirection="forward">
+      <ion-icon name="power-outline"></ion-icon>
+      <ion-label>Login</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button (click)="validateUser()">
-      <ion-icon name="mail-unread-outline"></ion-icon>
-      <ion-label>Connections</ion-label>
+    <ion-tab-button [routerLink]="['/register']" routerDirection="forward">
+      <ion-icon name="person-outline"></ion-icon>
+      <ion-label>Create Account</ion-label>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>

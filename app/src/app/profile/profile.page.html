@@ -18,7 +18,7 @@
   </ion-refresher>
 
 
-<ion-item (click)="openModal()">
+<ion-item button (click)="openModal()">
     <ion-grid>
     <ion-row>
     <ion-col>
@@ -27,7 +27,7 @@
 
     </ion-col>
     <ion-col >
-     <ion-button   expand="block" size="small" color="light">
+     <ion-button item-content  expand="block" size="small" color="light">
             Change Photo
              <ion-icon slot="end" name="pencil"></ion-icon>
           </ion-button>
@@ -51,11 +51,16 @@
   <ion-label position="floating">Full Name</ion-label>
   <ion-input [(ngModel)]="profileData.full_name"></ion-input>
 </ion-item>
-	 
-<ion-item>
-  <ion-label position="floating">Current Location</ion-label>
-  <ion-input [(ngModel)]="profileData.current_location"></ion-input>
-</ion-item>
+     <ion-item *ngIf="profileData.current_location === ''" (click)="setMap()">
+    <ion-label><strong>Current Location Not Set!</strong></ion-label>
+    <ion-button color="danger" slot="end">Add</ion-button>
+  </ion-item>
+
+
+  <ion-item *ngIf="profileData.current_location !== ''" (click)="setMap()">
+    <ion-label  class="ion-text-wrap"><strong>Current Location:  </strong>{{profileData.current_location}}</ion-label>
+    <ion-button color="dark" slot="end">Edit</ion-button>
+  </ion-item>
 
 <ion-item>
   <ion-label position="floating">Contact Number</ion-label>
@@ -67,13 +72,17 @@
   <ion-input [(ngModel)]="profileData.npassword"></ion-input>
 </ion-item>
 
-<ion-item>
+
+
+
+<ion-item button (click)="checkProfile('edit')">
+<ion-button (click)="checkProfile('edit')" style="width: 100%" expand="block">Save</ion-button>
+</ion-item>
+<ion-item style="display: none;">
+
   <ion-label position="floating">Type</ion-label>
   <ion-input [(ngModel)]="profileData.type"></ion-input>
 </ion-item>
-
-
-<ion-button (click)="checkProfile('edit')" expand="block">Edit Profile</ion-button>
 
 
   <ion-tabs>
@@ -89,10 +98,14 @@
       <ion-label style="color:#5fff45">My Profile</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button [routerLink]="['/connections']" routerDirection="forward">
-      <ion-icon name="mail-unread-outline"></ion-icon>
-      <ion-label>Connections</ion-label>
-    </ion-tab-button>
+      <ion-tab-button [routerLink]="['/connections']" routerDirection="forward">
+        <ion-icon name="mail-unread-outline"></ion-icon>
+        <ion-label>Connections</ion-label>
+      </ion-tab-button>
+      <ion-tab-button (click)="Logout()">
+        <ion-icon name="power-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 </ion-content>

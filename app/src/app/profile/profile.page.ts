@@ -4,6 +4,8 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { LoadingController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import {EditAvatarPage} from '../edit-avatar/edit-avatar.page';
+import { NavController  } from '@ionic/angular';
+import {MapPage} from '../map/map.page';
 
 @Component({
   selector: 'app-profile',
@@ -39,7 +41,7 @@ storedUser = {
 
    base_url = 'https://app.tenantconnect.ie/api';
 
-  constructor(public modalCtrl: ModalController, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {}
 
   validateUser(){
   this.pService.validateUser();  
@@ -124,10 +126,11 @@ const modal = await this.modalCtrl.create({
       componentProps: { type: this.storedUser.type, id: this.profileData.id}
     });
  modal.onDidDismiss().then((data)=>{
-
-   this.validateUser();
+    
+    this.navCtrl.navigateForward('profile');
 
     this.checkProfile('check');
+
     });
     return await modal.present();
 }
@@ -135,14 +138,33 @@ hmm(){
 console.log('ss');
 
 }
+
+async setMap() {
+
+const modal = await this.modalCtrl.create({
+      component: MapPage,
+      componentProps: { mapid: this.profileData.id, maptype: this.profileData.type, map: 'profile' }
+    });
+ modal.onDidDismiss().then((data)=>{
+   this.validateUser();
+    });
+    return await modal.present();
+
+// const modalPage = this.modalCtrl.create('');
+ //modalPage.present();
+}
+
 Logout(){
   this.pService.Logout();   
   }
  ngOnInit() {
    this.validateUser();
-
-  	this.checkProfile('check');
-
+  if (this.storedUser.type === '') {
+    this.navCtrl.navigateRoot('home');
+    }else{
+    this.checkProfile('check');
+    }
+    
  }
 
 }

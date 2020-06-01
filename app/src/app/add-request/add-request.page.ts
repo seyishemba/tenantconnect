@@ -48,25 +48,20 @@ requestData = {
       "furnished":""
     },   
     "Hfeatures":{
-      "high_rise" : false,
-      "low_rise" : false,
-      "disability_access" : false,
-      "door_man" : false,
       "elevator" : false,
-      "walkup" : false,
-      "health_club" : false,
-      "laundromat" : false,
-      "covered_parking" : false,
-      "garage" : false,
-      "parking_lot" : false,
-      "street_parking" : false,
-      "near_bus_stop" : false,
-      "near_subway" : false,
-      "electronic_security" : false,
-      "security" : false,
-      "swimming_pool" : false,
+      "parking" : false,
+      "central_heating" : false,
+      "washing_machine" : false,
+      "dryer" : false,
+      "dishwasher" : false,
+      "microwave" : false,
       "internet" : false,
-      "wireless_internet" : false,
+      "garden" : false,
+      "kettle" : false,
+      "toaster" : false,
+      "blender" : false,
+      "near_bus_stop" : false,
+      "security" : false,
     }, 
     "Rfeatures":{
       "air_condition" : false,
@@ -168,7 +163,7 @@ requestData = {
 
     if (this.requestData.property_type === 'House' || this.requestData.property_type === 'Place') {
 
-    formparams += '&building='+this.requestData.building_type+'&bedrooms='+this.requestData.bedrooms+'&bathrooms='+this.requestData.bathrooms+'&high_rise='+this.requestData.Hfeatures.high_rise+'&low_rise='+this.requestData.Hfeatures.low_rise+'&disability_access='+this.requestData.Hfeatures.disability_access+'&door_man='+this.requestData.Hfeatures.door_man+'&elevator='+this.requestData.Hfeatures.elevator+'&walkup='+this.requestData.Hfeatures.walkup+'&health_club='+this.requestData.Hfeatures.health_club+'&laundromat='+this.requestData.Hfeatures.laundromat+'&covered_parking='+this.requestData.Hfeatures.covered_parking+'&garage='+this.requestData.Hfeatures.garage+'&parking_lot='+this.requestData.Hfeatures.parking_lot+'&street_parking='+this.requestData.Hfeatures.street_parking+'&near_bus_stop='+this.requestData.Hfeatures.near_bus_stop+'&near_subway='+this.requestData.Hfeatures.near_subway+'&electronic_security='+this.requestData.Hfeatures.electronic_security+'&security='+this.requestData.Hfeatures.security+'&swimming_pool='+this.requestData.Hfeatures.swimming_pool+'&internet='+this.requestData.Hfeatures.internet+'&wireless_internet='+this.requestData.Hfeatures.wireless_internet;
+    formparams += '&building='+this.requestData.building_type+'&bedrooms='+this.requestData.bedrooms+'&bathrooms='+this.requestData.bathrooms+'&elevator='+this.requestData.Hfeatures.elevator+'&parking='+this.requestData.Hfeatures.parking+'&central_heating='+this.requestData.Hfeatures.central_heating+'&washing_machine='+this.requestData.Hfeatures.washing_machine+'&dryer='+this.requestData.Hfeatures.dryer+'&dishwasher='+this.requestData.Hfeatures.dishwasher+'&microwave='+this.requestData.Hfeatures.microwave+'&internet='+this.requestData.Hfeatures.internet+'&garden='+this.requestData.Hfeatures.garden+'&kettle='+this.requestData.Hfeatures.kettle+'&toaster='+this.requestData.Hfeatures.toaster+'&blender='+this.requestData.Hfeatures.blender+'&near_bus_stop='+this.requestData.Hfeatures.near_bus_stop+'&security='+this.requestData.Hfeatures.security;
     }
     if (this.requestData.property_type === 'Room') {
 

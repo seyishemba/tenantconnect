@@ -47,15 +47,27 @@
     <ion-icon name="cash-outline" slot="start"></ion-icon>
     <ion-input placeholder="Amount" required [(ngModel)]="listingData.amount"></ion-input> 
      <ion-select required [(ngModel)]="listingData.duration" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Duration">
-      <ion-select-option value="Month">Month</ion-select-option>
-      <ion-select-option value="Year">Year</ion-select-option>
+      <ion-select-option value="Month">Monthly</ion-select-option>
+      <ion-select-option value="Week">Weekly</ion-select-option>
     </ion-select>
   </ion-item>
-  <ion-item >
+    <ion-item >
     <ion-icon name="basket" slot="start"></ion-icon>
-    <ion-input placeholder="When to move" required [(ngModel)]="listingData.when_to_move"></ion-input> 
+    <ion-label>When to move</ion-label>
+    <ion-select required [(ngModel)]="swhen" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select...">
+      <ion-select-option value="instant">Immediately</ion-select-option>
+      <ion-select-option value="date">Choose Date</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item *ngIf="swhen === 'date'">
+    <ion-input type="date" placeholder="When to move" [(ngModel)]="listingData.when_to_move"></ion-input> 
+  </ion-item>
+  <ion-item *ngIf="swhen === 'instant'">
+    <ion-input type="text" readonly placeholder="Immediately" [(ngModel)]="listingData.when_to_move" value="Immediately"></ion-input>
 
   </ion-item>
+
 
   <ion-item class="ion-activated">
     <ion-icon name="bed" slot="start"></ion-icon>
@@ -67,7 +79,7 @@
 
   <ion-item>
     <ion-icon name="move" slot="start"></ion-icon>
-    <ion-input placeholder="Apartment Size" required [(ngModel)]="listingData.size"></ion-input> 
+    <ion-input placeholder="Size" required [(ngModel)]="listingData.size"></ion-input> 
     <ion-select required [(ngModel)]="listingData.measurement" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Measurement">
       <ion-select-option value="Sq">Sq</ion-select-option>
       <ion-select-option value="Cm">Cm</ion-select-option>
@@ -86,7 +98,7 @@
 
     </ion-col>
     <ion-col size="6">
-      <h5 style="text-align: center;">Bedrooms:
+      <h5 style="text-align: center;">Bathrooms:
    </h5>
     <ion-input placeholder="Select Amount" required [(ngModel)]="listingData.bathrooms"></ion-input> 
     </ion-col>
@@ -103,25 +115,20 @@
 <strong>Features</strong>
 <ion-grid>
   <ion-row>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.high_rise"></ion-checkbox> High Rise </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.low_rise"></ion-checkbox> Low Rise </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.disability_access"></ion-checkbox> Disability access </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.door_man"></ion-checkbox> Doorman </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.elevator"></ion-checkbox> Elevator </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.walkup"></ion-checkbox> Walkup </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.health_club"></ion-checkbox> Health Club </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.laundromat"></ion-checkbox> Laundromat </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.covered_parking"></ion-checkbox> Covered Parking </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.garage"></ion-checkbox> Garage </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.parking_lot"></ion-checkbox> Parking Lot </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.street_parking"></ion-checkbox> Street Parking </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.near_bus_stop"></ion-checkbox> Near Bus Stop </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.near_subway"></ion-checkbox> Near Subway </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.electronic_security"></ion-checkbox> Electronic Security </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.security"></ion-checkbox> Security </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.swimming_pool"></ion-checkbox> Swimming Pool </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.internet"></ion-checkbox> Internet </ion-col>
-    <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.wireless_internet"></ion-checkbox> Wireless Internet </ion-col>
+   <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.elevator"></ion-checkbox> Elevator </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.parking"></ion-checkbox> Parking </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.central_heating"></ion-checkbox> Central Heating </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.washing_machine"></ion-checkbox> Washing Machine </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.dryer"></ion-checkbox> Dryer </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.dishwasher"></ion-checkbox> Dishwasher </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.microwave"></ion-checkbox> Microwave </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.internet"></ion-checkbox> Internet </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.garden"></ion-checkbox> Garden | Patio | Balcony </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.kettle"></ion-checkbox> Kettle </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.toaster"></ion-checkbox> Toaster </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.blender"></ion-checkbox> Blender </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.near_bus_stop"></ion-checkbox> Near Bus Stop </ion-col>
+ <ion-col size="6"><ion-checkbox [(ngModel)]="listingData.Hfeatures.security"></ion-checkbox> Security </ion-col>
 
 </ion-row>
 </ion-grid>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,  ViewChild, ElementRef, NgZone  } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../post.service';
 import { HTTP } from '@ionic-native/http/ngx';
@@ -7,10 +7,10 @@ import { ActionSheetController } from '@ionic/angular';
 import { NavController  } from '@ionic/angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {MapPage} from '../map/map.page';
 import { ModalController } from '@ionic/angular';
 import {EditImagePage} from '../edit-image/edit-image.page';
 import { DomSanitizer } from "@angular/platform-browser";
-
 
 @Component({
   selector: 'app-view-listing',
@@ -18,6 +18,7 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ['./view-listing.page.scss'],
 })
 export class ViewListingPage implements OnInit {
+  
 
  listingId = null;
 photos=[
@@ -121,9 +122,9 @@ photos=[
     cleanSupportURL: any;
     sanitizer: DomSanitizer;
 
-  constructor(sanitizer: DomSanitizer, public modalCtrl: ModalController, private theInAppBrowser: InAppBrowser, private photoViewer: PhotoViewer, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
+  constructor(
+    sanitizer: DomSanitizer, public modalCtrl: ModalController, private theInAppBrowser: InAppBrowser, private photoViewer: PhotoViewer, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
     this.sanitizer = sanitizer;
-
   }
  validateUser(){
   this.pService.validateUser();  
@@ -140,7 +141,7 @@ photos=[
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-
+          this.deleteListing(this.listingId);
         }
       }, {
         text: 'Edit',
@@ -201,6 +202,46 @@ photos=[
 
   });
    }
+
+
+   async deleteListing(id){
+  this.checkUser();
+    
+    const loading = await this.loadingCntrl.create({
+      message: 'Deleting...'
+    });
+    await loading.present();
+    var formparams = '?request=delete_listing&id='+id;
+
+    this.http.get(this.base_url+formparams, {}, {})
+  .then(data => {
+  loading.dismiss();
+   let response_data = JSON.parse(data.data);
+  if (response_data.response === 'OK') { 
+    alert('Listing Successfully Deleted');
+    this.navCtrl.navigateRoot('home');
+  }
+  else if (response_data.response === 'error') { 
+    alert(response_data.response_message);
+  }
+  else{
+    alert('An unknown error occured');
+  }
+    console.log(data.status);
+    console.log(data.data); // data received by server
+    console.log(data.headers);
+    console.log(this.listingData)
+
+  })
+  .catch(error => {
+  loading.dismiss();
+    alert('Unknown error occured. Check your internet connection')
+    console.log(error.status);
+    console.log(error.error); // error message as string
+    console.log(error.headers);
+
+  });
+   }
 next(img){
   var theimg = "'"+img+"'";
 this.photoViewer.show(theimg);
@@ -221,6 +262,21 @@ async openModal() {
 const modal = await this.modalCtrl.create({
       component: EditImagePage,
       componentProps: { value: this.listingData.id }
+    });
+ modal.onDidDismiss().then((data)=>{
+      this.showListing(this.listingId);
+    });
+    return await modal.present();
+
+// const modalPage = this.modalCtrl.create('');
+ //modalPage.present();
+}
+
+async setMap() {
+
+const modal = await this.modalCtrl.create({
+      component: MapPage,
+      componentProps: { mapid: this.listingData.id, maptype: 'listing', map: 'listing' }
     });
  modal.onDidDismiss().then((data)=>{
       this.showListing(this.listingId);
@@ -253,6 +309,8 @@ ionViewWillEnter(){
   console.log(this.storedUser); 
   }
 
+
+  
  ngOnInit() {
     this.checkUser();
   

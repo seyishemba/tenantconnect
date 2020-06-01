@@ -6,6 +6,8 @@ import { LoadingController } from '@ionic/angular';
 import { ActionSheetController } from '@ionic/angular';
 import { NavController  } from '@ionic/angular';
 import { DomSanitizer } from "@angular/platform-browser";
+import {MapPage} from '../map/map.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-request',
@@ -112,7 +114,7 @@ export class ViewRequestPage implements OnInit {
     cleanSupportURL: any;
     sanitizer: DomSanitizer;
 
-  constructor(sanitizer: DomSanitizer, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
+  constructor(sanitizer: DomSanitizer, public modalCtrl: ModalController, public navCtrl: NavController, public action: ActionSheetController, private activatedRoute: ActivatedRoute, private http: HTTP, private pService: PostService,  public loadingCntrl: LoadingController) {
     this.sanitizer = sanitizer;
 
   }
@@ -132,7 +134,7 @@ export class ViewRequestPage implements OnInit {
         role: 'destructive',
         icon: 'trash',
         handler: () => {
-
+          this.deleteRequest(this.requestId);
         }
       }, {
         text: 'Edit',
@@ -189,6 +191,45 @@ export class ViewRequestPage implements OnInit {
 
   });
    }
+
+
+   async deleteRequest(id){
+  this.checkUser();
+    
+    const loading = await this.loadingCntrl.create({
+      message: 'Deleting...'
+    });
+    await loading.present();
+    var formparams = '?request=delete_request&id='+id;
+
+    this.http.get(this.base_url+formparams, {}, {})
+  .then(data => {
+  loading.dismiss();
+   let response_data = JSON.parse(data.data);
+  if (response_data.response === 'OK') { 
+    alert('Request Successfully Deleted');
+    this.navCtrl.navigateRoot('home');
+  }
+  else if (response_data.response === 'error') { 
+    alert(response_data.response_message);
+  }
+  else{
+    alert('An unknown error occured');
+  }
+    console.log(data.status);
+    console.log(data.data); // data received by server
+    console.log(data.headers);
+
+  })
+  .catch(error => {
+  loading.dismiss();
+    alert('Unknown error occured. Check your internet connection')
+    console.log(error.status);
+    console.log(error.error); // error message as string
+    console.log(error.headers);
+
+  });
+   }
 doRefresh(event) {
 
     this.validateUser();
@@ -207,6 +248,21 @@ doRefresh(event) {
   console.log(this.storedUser); 
   }
 
+
+async setMap() {
+
+const modal = await this.modalCtrl.create({
+      component: MapPage,
+      componentProps: { mapid: this.requestData.id, maptype: 'requests', map: 'listing' }
+    });
+ modal.onDidDismiss().then((data)=>{
+      this.showrequest(this.requestId);
+    });
+    return await modal.present();
+
+// const modalPage = this.modalCtrl.create('');
+ //modalPage.present();
+}
  ngOnInit() {
     this.checkUser();
    this.requestId = this.activatedRoute.snapshot.paramMap.get('id');

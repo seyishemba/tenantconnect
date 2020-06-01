@@ -30,17 +30,27 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title>{{requestData.title}}</ion-card-title>
+    <br>
+    <ion-button fill="outline" size="small">{{requestData.sub_building_type}}</ion-button>
   </ion-card-header>
 
-  <ion-item>
-    <ion-label>{{requestData.location}}</ion-label>
-    <ion-button fill="outline" slot="end">{{requestData.sub_building_type}}</ion-button>
+<ion-item *ngIf="requestData.location === ''" (click)="setMap()">
+    <ion-label>Location Not Set...</ion-label>
+    <ion-button color="danger" slot="end" *ngIf="requestData.owner.username === storedUser.username">Add </ion-button>
   </ion-item>
+
+
+  <ion-item *ngIf="requestData.location !== ''" (click)="setMap()">
+    <ion-label class="ion-text-wrap">{{requestData.location}}</ion-label>
+    <ion-button color="dark" slot="end" *ngIf="requestData.owner.username === storedUser.username">Edit</ion-button>
+  </ion-item>
+
 
   <ion-card-content>
     {{requestData.description}}
   </ion-card-content>
 </ion-card>
+
 
 <ion-card>
   <ion-item class="ion-activated">

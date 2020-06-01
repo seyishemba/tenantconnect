@@ -1,4 +1,4 @@
 git init
 git add -A
-git commit -m 'Fix bad repo'
+git commit -m 'Tenant Connect App'
 git push

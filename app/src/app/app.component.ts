@@ -30,9 +30,12 @@ export class AppComponent {
   ) {
     this.sideMenu();
     this.initializeApp();
+    this.checkUser();
   }
 
   initializeApp() {
+     this.checkUser();
+    console.log('hi');
     this.platform.ready().then(() => {
       this.statusBar.styleLightContent();
   //    this.statusBar.overlaysWebView(true);
@@ -40,7 +43,6 @@ export class AppComponent {
 // set status bar to white
 //this.statusBar.backgroundColorByHexString('#ffffff');
       this.splashScreen.hide();
-      this.checkUser();
     });
   }
 
@@ -91,7 +93,14 @@ home(){
 
     await alert.present();
   }
-
+mmenu = 
+    [
+      {
+        title : "Home",
+        url   : "/home",
+        icon  : "home"
+      },
+    ];
   async privacy() {
     const alert = await this.alertController.create({
       header: 'Privacy Policy',
@@ -142,13 +151,10 @@ home(){
 
   sideMenu()
   {
-    this.navigate =
-    [
-      {
-        title : "Home",
-        url   : "/home",
-        icon  : "home"
-      },
-    ]
+    this.navigate = this.mmenu;
+  }
+  ngOnInit(){
+      this.checkUser();
+      console.log(this.storedLoginJson.type);
   }
 }

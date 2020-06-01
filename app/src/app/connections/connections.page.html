@@ -17,8 +17,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-    <ion-list>
-    	<div *ngFor="let connection of connections">
+    	<span *ngFor="let connection of connections">
  	<ion-item button routerLink="/view-connection/{{connection.username}}" routerDirection="forward">
           <ion-avatar slot="start">
           	 <img *ngIf="connection.photo === 'Google' || connection.photo === 'Facebook'" src="{{connection.photo}}">
@@ -30,8 +29,7 @@
             <h2><strong>{{connection.username}}</strong></h2>
           </ion-label>
         </ion-item>
-    </div>
-    </ion-list>
+    </span>
 
   <ion-tabs>
   <ion-tab-bar slot="bottom">
@@ -50,6 +48,10 @@
       <ion-icon name="mail-unread" style="color: #5fff45"></ion-icon>
       <ion-label style="color:#5fff45">Connections</ion-label>
     </ion-tab-button>
+    <ion-tab-button (click)="Logout()">
+        <ion-icon name="power-outline"></ion-icon>
+        <ion-label>Logout</ion-label>
+      </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
 </ion-content>

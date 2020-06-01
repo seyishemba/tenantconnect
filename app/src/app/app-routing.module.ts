@@ -52,6 +52,10 @@ const routes: Routes = [
     path: 'edit-avatar',
     loadChildren: () => import('./edit-avatar/edit-avatar.module').then( m => m.EditAvatarPageModule)
   },
+  {
+    path: 'map',
+    loadChildren: () => import('./map/map.module').then( m => m.MapPageModule)
+  },
 ];
 
 @NgModule({

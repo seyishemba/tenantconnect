@@ -84,8 +84,14 @@ doRefresh(event) {
   }
 
   ngOnInit() {
-    this.getConnections();
+   this.validateUser();
 
+if (this.storedUser.type === '') {
+    this.navCtrl.navigateRoot('home');
+    }else{
+    this.getConnections();
+      
+    }
   }
 
 }

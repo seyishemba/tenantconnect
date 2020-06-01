@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choose Location</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div style="padding: 15px">
+	   <p style="margin: 0px; font-weight: 500">When done adding location, click the close button at the bottom of the page to go back.</p>
+	</div>
+          <div style="width: 100%; height: 70%">
+            <iframe [src]="cleanSupportURL" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+
+          </div>
+          <div style="padding: 15px">
+
+<ion-button (click)="closeModal()"  expand="block"> Close </ion-button>
+
+</div>
+
+</ion-content>
